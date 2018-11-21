@@ -27,9 +27,11 @@ public class TimeController : MonoBehaviour {
     {
         "Go you!!", 
         "Well done!!",
-        "Yowza!",
+        "WOW!",
         "Biking saves money and burns calories",
-        "I like crayons"
+        "Keep up the good work!!",
+        "Good job :)",
+        "Nicely done!"
     };
 
 	void Start ()
