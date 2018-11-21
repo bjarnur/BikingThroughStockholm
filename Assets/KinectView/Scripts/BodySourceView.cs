@@ -7,14 +7,18 @@ using Joint = Windows.Kinect.Joint;
 
 public class BodySourceView : MonoBehaviour 
 {
+    public GameObject canvas;
     public Material BoneMaterial;
     public GameObject BodySourceManager;
+    public float footHigh;
+    public float footLow;
 
     private float cyclingSpeed = 0.0f;
     private bool isLeftFootUp = false;
     private float timeSpent = 0.0f;
     private float previousTimeSpent = 0.0f;
     private float speedFactor = 2.5f;
+    private RhythmTracker rhythmTracker;
 
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private List<Kinect.JointType> _joints = new List<Kinect.JointType>
@@ -23,7 +27,7 @@ public class BodySourceView : MonoBehaviour
         Kinect.JointType.FootRight,
     };
     private BodySourceManager _BodyManager;
-    
+
     private Dictionary<Kinect.JointType, Kinect.JointType> _BoneMap = new Dictionary<Kinect.JointType, Kinect.JointType>()
     {
         { Kinect.JointType.FootLeft, Kinect.JointType.AnkleLeft },
@@ -55,7 +59,12 @@ public class BodySourceView : MonoBehaviour
         { Kinect.JointType.SpineShoulder, Kinect.JointType.Neck },
         { Kinect.JointType.Neck, Kinect.JointType.Head },
     };
-    
+
+    void Start()
+    {
+        rhythmTracker = canvas.GetComponent<RhythmTracker>();
+    }
+
     void Update () 
     {
         if (BodySourceManager == null)
@@ -123,6 +132,7 @@ public class BodySourceView : MonoBehaviour
     private GameObject CreateBodyObject(ulong id)
     {
         GameObject body = new GameObject("Body:" + id);
+        body.SetActive(false);
         
         // Create joints
         //foreach (Kinect.JointType joint in _joints)
@@ -175,8 +185,7 @@ public class BodySourceView : MonoBehaviour
             jointObj.localPosition = GetVector3FromJoint(sourceJoint);
             if(jt == Kinect.JointType.FootLeft)
             {
-                print(jointObj.localPosition);
-                manageCyclingTimes(jointObj.localPosition)
+                manageCyclingTimes(jointObj.localPosition);
                 //-4.2 (Down) -2.1 (Up) -> set the threshold at 3
             }
             
@@ -195,27 +204,34 @@ public class BodySourceView : MonoBehaviour
     }
     /****** Function to calculate the speed ********/
     private void manageCyclingTimes(Vector3 cyclingLocalPosition) {
-        if (cyclingLocalPosition.y < 3 && isLeftFootUp) {
+        //Debug.Log("foot height " + cyclingLocalPosition.y);
+        if (cyclingLocalPosition.y < footLow && isLeftFootUp) {
             isLeftFootUp = false;
             calculateCyclingSpeed(); // We call here the speed func. This will use the previousTimeSpent and the current value of timeSpent
             previousTimeSpent = timeSpent; // THen we change the previousTimeSpent value for the next iteration
             timeSpent = 0.0f;
+            Debug.Log("DOWN");
+            rhythmTracker.UpdateRhythm();
         }
-        else if (cyclingLocalPosition.y > 3 && !isLeftFootUp) {
+        else if (cyclingLocalPosition.y > footHigh && !isLeftFootUp) {
             isLeftFootUp = true;
             calculateCyclingSpeed();
             previousTimeSpent = timeSpent;
             timeSpent = 0.0f;
+            Debug.Log("UP");
         }
 
     }
     private void calculateCyclingSpeed() {
         cyclingSpeed = Mathf.Abs(timeSpent - previousTimeSpent) * speedFactor; // We get the difference in absolute val and we multiply it for some factor. This will have to be tuned.
+        //print(cyclingSpeed);
     }
 
     public float getCyclingSpeed() {
         return cyclingSpeed;
     }
+
+    
     /**********************************************/
 
     private static Color GetColorForState(Kinect.TrackingState state)
@@ -237,4 +253,6 @@ public class BodySourceView : MonoBehaviour
     {
         return new Vector3(joint.Position.X * 10, joint.Position.Y * 10, joint.Position.Z * 10);
     }
+
+
 }
