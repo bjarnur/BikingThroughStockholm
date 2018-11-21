@@ -77,15 +77,11 @@ public class TimeController : MonoBehaviour {
     }
 
     private IEnumerator DisplayReward()
-    {
-        float timeActive = 0.0f;                
+    {        
+        PrepareMilestonePanel();
+        List<GameObject> fireworks = LaunchFireworks();
 
-        int complimentIndex = Random.Range(0, compliments.Count);
-        milestoneText.text = minutesSoFar + ":" + secondsSoFar;
-        complimentText.text = compliments[complimentIndex];
-
-        launchFireworks();
-
+        float timeActive = 0.0f;
         milestonePanel.SetActive(true);
         while (timeActive < rewardDuration)
         {
@@ -94,32 +90,54 @@ public class TimeController : MonoBehaviour {
         }
 
         milestonePanel.SetActive(false);
+        DestroyFireworks(fireworks);
         yield break;
     }
 
-    private void launchFireworks()
+    private void PrepareMilestonePanel()
     {
-        Vector3 panelPosition = milestonePanel.GetComponent<RectTransform>().transform.position;
-        float offsetX = milestonePanel.GetComponent<RectTransform>().rect.width / 2;
-        float offsetY = milestonePanel.GetComponent<RectTransform>().rect.height / 2;
+        int complimentIndex = Random.Range(0, compliments.Count);
+        milestoneText.text = minutesSoFar + ":" + secondsSoFar;
+        complimentText.text = compliments[complimentIndex];
+    }
 
+    private List<GameObject> LaunchFireworks()
+    {
+        List<GameObject> res = new List<GameObject>();
         RectTransform rect = milestonePanel.GetComponent<RectTransform>();
 
-        GameObject firework1 = Instantiate(fireworkPrefab, milestonePanel.transform, false);
-        GameObject firework2 = Instantiate(fireworkPrefab, milestonePanel.transform, false);
-        GameObject firework3 = Instantiate(fireworkPrefab, milestonePanel.transform, false);
-        GameObject firework4 = Instantiate(fireworkPrefab, milestonePanel.transform, false);
+        for(int i = 0; i < 4; i++)
+        {
+            GameObject fw = Instantiate(fireworkPrefab, milestonePanel.transform, false);
+            res.Add(fw);
 
-        firework1.GetComponent<ParticleSystem>().startColor = new Vector4(1, 0, 0, 1);
-        firework1.transform.localPosition += new Vector3(rect.offsetMin.x, rect.offsetMax.y / 2, 0);
+            var particleSys = fw.GetComponent<ParticleSystem>().main;
+            particleSys.startColor = Random.ColorHSV();
 
-        firework2.GetComponent<ParticleSystem>().startColor = new Vector4(0, 1, 0, 1);
-        firework2.transform.localPosition -= new Vector3(rect.offsetMin.x, rect.offsetMax.y / 2, 0);
+            switch(i)
+            { 
+                case 0:
+                    fw.transform.localPosition += new Vector3(rect.offsetMin.x, rect.offsetMax.y / 2, 0);
+                    break;
+                case 1:
+                    fw.transform.localPosition -= new Vector3(rect.offsetMin.x, rect.offsetMax.y / 2, 0);
+                    break;
+                case 2:
+                    fw.transform.localPosition -= new Vector3(rect.offsetMax.x, rect.offsetMax.y / 2, 0);
+                    break;
+                case 3:
+                    fw.transform.localPosition += new Vector3(rect.offsetMax.x, rect.offsetMax.y / 2, 0);
+                    break;
+            }
+        }
+        return res;
+    }
 
-        firework3.GetComponent<ParticleSystem>().startColor = new Vector4(0, 0, 1, 1);
-        firework3.transform.localPosition -= new Vector3(rect.offsetMax.x, rect.offsetMax.y / 2, 0);
-
-        firework4.GetComponent<ParticleSystem>().startColor = new Vector4(0, 1, 1, 1);
-        firework4.transform.localPosition += new Vector3(rect.offsetMax.x, rect.offsetMax.y / 2, 0);
+    private void DestroyFireworks(List<GameObject> fireworks)
+    {
+        foreach(GameObject firework in fireworks)
+        {
+            GameObject.Destroy(firework);
+        }
     }
 }
