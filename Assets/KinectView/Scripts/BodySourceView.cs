@@ -10,7 +10,12 @@ public class BodySourceView : MonoBehaviour
     public Material BoneMaterial;
     public GameObject BodySourceManager;
 
-    
+    private float cyclingSpeed = 0.0f;
+    private bool isLeftFootUp = false;
+    private float timeSpent = 0.0f;
+    private float previousTimeSpent = 0.0f;
+    private float speedFactor = 2.5f;
+
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private List<Kinect.JointType> _joints = new List<Kinect.JointType>
     {
@@ -109,7 +114,7 @@ public class BodySourceView : MonoBehaviour
                 {
                     _Bodies[body.TrackingId] = CreateBodyObject(body.TrackingId);
                 }
-                
+                timeSpent += Time.deltaTime;  // Maybe it's not the best place to set this, 2 bodies can cause to double count. Maybe for now it just works
                 RefreshBodyObject(body, _Bodies[body.TrackingId]);
             }
         }
@@ -187,7 +192,31 @@ public class BodySourceView : MonoBehaviour
             }
         }
     }
-    
+    /****** Function to calculate the speed ********/
+    private void manageCyclingTimes(Vector3 cyclingLocalPosition) {
+        if (cyclingLocalPosition.y < 3 && isLeftFootUp) {
+            isLeftFootUp = false;
+            calculateCyclingSpeed(); // We call here the speed func. This will use the previousTimeSpent and the current value of timeSpent
+            previousTimeSpent = timeSpent; // THen we change the previousTimeSpent value for the next iteration
+            timeSpent = 0.0f;
+        }
+        else if (cyclingLocalPosition.y > 3 && !isLeftFootUp) {
+            isLeftFootUp = true;
+            calculateCyclingSpeed();
+            previousTimeSpent = timeSpent;
+            timeSpent = 0.0f;
+        }
+
+    }
+    private void calculateCyclingSpeed() {
+        cyclingSpeed = Mathf.Abs(timeSpent - previousTimeSpent) * speedFactor; // We get the difference in absolute val and we multiply it for some factor. This will have to be tuned.
+    }
+
+    public float getCyclingSpeed() {
+        return cyclingSpeed;
+    }
+    /**********************************************/
+
     private static Color GetColorForState(Kinect.TrackingState state)
     {
         switch (state)
