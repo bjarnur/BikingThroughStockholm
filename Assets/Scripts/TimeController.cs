@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class TimeController : MonoBehaviour {
 
     [SerializeField] private float rewardInterval;
+    [SerializeField] private float rewardDuration;
     [SerializeField] GameObject milestonePanel;
-    [SerializeField] GameObject timePrompt;
+    [SerializeField] GameObject timePanel;
 
     private GameObject milestonePrompt;
     private GameObject complimentPrompt;
+    private GameObject timePrompt;
 
     private float timeSoFar;
     private float lastMilestone;
@@ -36,6 +38,7 @@ public class TimeController : MonoBehaviour {
 
         milestonePrompt = milestonePanel.transform.GetChild(0).gameObject;
         complimentPrompt = milestonePanel.transform.GetChild(1).gameObject;
+        timePrompt = timePanel.transform.GetChild(0).gameObject;
 
         timeText = timePrompt.GetComponent<Text>();
         milestoneText = milestonePrompt.GetComponent<Text>();
@@ -65,12 +68,12 @@ public class TimeController : MonoBehaviour {
             Debug.Log("progress since last " + progressSinceLastMilestone);
             Debug.Log("time so far " + timeSoFar);
             Debug.Log("reward intervarl " + rewardInterval);
-            StartCoroutine("DisplayReward", 2);
+            StartCoroutine("DisplayReward");
             lastMilestone = timeSoFar;
         }
     }
 
-    private IEnumerator DisplayReward(float seconds)
+    private IEnumerator DisplayReward()
     {
         float timeActive = 0.0f;                
 
@@ -79,7 +82,7 @@ public class TimeController : MonoBehaviour {
         complimentText.text = compliments[complimentIndex];
 
         milestonePanel.SetActive(true);
-        while (timeActive < seconds)
+        while (timeActive < rewardDuration)
         {
             timeActive += Time.deltaTime;
             yield return null;
