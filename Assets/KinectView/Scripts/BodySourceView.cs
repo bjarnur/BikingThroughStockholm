@@ -176,6 +176,7 @@ public class BodySourceView : MonoBehaviour
             if(jt == Kinect.JointType.FootLeft)
             {
                 print(jointObj.localPosition);
+                manageCyclingTimes(jointObj.localPosition)
                 //-4.2 (Down) -2.1 (Up) -> set the threshold at 3
             }
             
