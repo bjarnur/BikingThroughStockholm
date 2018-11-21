@@ -9,6 +9,7 @@ public class TimeController : MonoBehaviour {
     [SerializeField] private float rewardDuration;
     [SerializeField] GameObject milestonePanel;
     [SerializeField] GameObject timePanel;
+    [SerializeField] GameObject fireworkPrefab;
 
     private GameObject milestonePrompt;
     private GameObject complimentPrompt;
@@ -83,6 +84,8 @@ public class TimeController : MonoBehaviour {
         milestoneText.text = minutesSoFar + ":" + secondsSoFar;
         complimentText.text = compliments[complimentIndex];
 
+        launchFireworks();
+
         milestonePanel.SetActive(true);
         while (timeActive < rewardDuration)
         {
@@ -92,5 +95,31 @@ public class TimeController : MonoBehaviour {
 
         milestonePanel.SetActive(false);
         yield break;
+    }
+
+    private void launchFireworks()
+    {
+        Vector3 panelPosition = milestonePanel.GetComponent<RectTransform>().transform.position;
+        float offsetX = milestonePanel.GetComponent<RectTransform>().rect.width / 2;
+        float offsetY = milestonePanel.GetComponent<RectTransform>().rect.height / 2;
+
+        RectTransform rect = milestonePanel.GetComponent<RectTransform>();
+
+        GameObject firework1 = Instantiate(fireworkPrefab, milestonePanel.transform, false);
+        GameObject firework2 = Instantiate(fireworkPrefab, milestonePanel.transform, false);
+        GameObject firework3 = Instantiate(fireworkPrefab, milestonePanel.transform, false);
+        GameObject firework4 = Instantiate(fireworkPrefab, milestonePanel.transform, false);
+
+        firework1.GetComponent<ParticleSystem>().startColor = new Vector4(1, 0, 0, 1);
+        firework1.transform.localPosition += new Vector3(rect.offsetMin.x, rect.offsetMax.y / 2, 0);
+
+        firework2.GetComponent<ParticleSystem>().startColor = new Vector4(0, 1, 0, 1);
+        firework2.transform.localPosition -= new Vector3(rect.offsetMin.x, rect.offsetMax.y / 2, 0);
+
+        firework3.GetComponent<ParticleSystem>().startColor = new Vector4(0, 0, 1, 1);
+        firework3.transform.localPosition -= new Vector3(rect.offsetMax.x, rect.offsetMax.y / 2, 0);
+
+        firework4.GetComponent<ParticleSystem>().startColor = new Vector4(0, 1, 1, 1);
+        firework4.transform.localPosition += new Vector3(rect.offsetMax.x, rect.offsetMax.y / 2, 0);
     }
 }
