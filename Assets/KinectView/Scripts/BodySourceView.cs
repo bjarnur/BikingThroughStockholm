@@ -215,6 +215,8 @@ public class BodySourceView : MonoBehaviour
     public float getCyclingSpeed() {
         return cyclingSpeed;
     }
+
+
     /**********************************************/
 
     private static Color GetColorForState(Kinect.TrackingState state)
