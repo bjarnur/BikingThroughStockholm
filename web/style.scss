@@ -1,0 +1,351 @@
+@font-face {
+  font-family: monofonto;
+  src: url(monofonto.ttf);
+}
+
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:200|Source+Sans+Pro:200,300');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  // font-family: monofonto, Calibri, sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16pt;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 200;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+
+  section {
+    width: 100%;
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+
+      .text-content{
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-bottom: 40px;
+        text-align: justify;
+        text-justify: inter-word;
+
+        a {
+          color: rgb(141, 158, 158);
+          font-weight: 200;
+          text-decoration:none;
+        }
+      }
+
+      .div-2 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        div {
+          margin: 2px;
+          width: calc(33% - 4px);
+          img{
+            width: 100%;
+            padding-bottom: 20px;
+          }
+        }
+      }
+    }
+
+    .section-title {
+      background-color: rgba(255, 255, 255, 0.70);
+      text-align: center;
+      color: rgb(32, 32, 36);
+      font-weight: 300;
+      padding: 10px 0 10px 0;
+      margin-bottom: 40px;
+    }
+  }
+
+  :not(#slideshow) .container { 
+    //background-color: rgba(200, 200, 200, 1); 
+    background-color: rgb(44,44,50); 
+  }
+}
+
+#background {
+  background: url('pics/background.png');
+  background-size: auto 100%;
+  margin-bottom: -20px;
+}
+
+#slideshow {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url('pics/filter.png'), url('pics/Biking_demo.jpg');
+  //background: url('pics/menu.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  font-family: monofonto, Calibri, sans-serif;
+  font-size: 24pt;
+  color: white;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+
+    .gametitle {
+      margin-right: 20px;
+      font-size: 96pt;
+      font-weight: bold;
+      line-height: 86pt;
+      color: #ffbd00;
+  
+      div {
+        text-align: right;
+        font-size: 52pt;
+        line-height: 46pt;
+        padding-right: 4px;
+      }
+    }
+
+    .outlined {
+      text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    }
+  }
+}
+
+#main-content {
+  .centered {
+    margin: auto;
+    margin-top: 20px;
+
+    img {
+      margin: auto;
+      width: 60%;
+      height: auto;
+      display: block;
+      padding-bottom: 40px;
+    }
+  }
+  .text-content {
+    font-family: "Work Sans", sans-serif;
+    font-size: 18pt;
+    font-weight: 200;
+    padding-top: 50px;
+    padding-left: 10% !important;
+    padding-right: 10% !important;
+    background: rgb(116, 97, 57);
+  }
+}
+
+#gallery {
+  .pictures {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 -2px;
+    padding-bottom: 40px;
+
+    div {
+      margin: 2px;
+      width: calc(25% - 4px);
+
+      img {
+        width: 100%;
+      }
+      img:hover {
+        cursor: pointer;
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+#team {
+  .team {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 -2px;
+
+    .user {
+      width: 33%;
+      text-align: center;
+      font-weight: 300;
+      margin-bottom: 30px;
+
+      img {
+        width: 40%;
+        height: auto;
+        margin-bottom: 20px;
+        border-radius: 50%;
+  
+        /* &:hover {
+          cursor: pointer;
+          opacity: 0.7;
+        } */
+      }
+
+      .email {
+        color: rgb(141, 158, 158);
+        font-weight: 200;
+        text-decoration:none;
+      }
+
+      .list {
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-weight: 200;
+        font-size: 14pt;
+        color: rgba(255, 255, 255, 0.70);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  #app section .container { width: 100%; }
+  #gallery .pictures div { width: calc(33% - 4px); }
+
+  #slideshow {
+    font-size: 18pt;
+
+    .gametitle {
+      margin-right: 20px;
+      font-size: 52pt;
+      line-height: 52pt;
+
+      .subtitle {
+        font-size: 36pt;
+        line-height: 32pt;
+        padding-right: 4px;
+      }
+    }
+  }
+
+}
+
+@media only screen and (max-width: 600px) {
+  #gallery .pictures div { width: calc(50% - 4px); }
+  #team .team .user { width: 50%; }
+
+  #slideshow {
+    font-size: 12pt;
+
+    .gametitle {
+      margin-right: 20px;
+      font-size: 52pt;
+      line-height: 52pt;
+
+      .subtitle {
+        font-size: 36pt;
+        line-height: 32pt;
+        padding-right: 4px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #gallery .pictures div { width: calc(100% - 4px); }
+  #team .team .user { width: 100%; }
+  #slideshow .container {
+    display: block;
+    text-align: center;
+    
+    .gametitle {
+      margin-bottom: 20px;
+      div {
+        margin-right: 62px;
+      }
+    }
+  }
+  .text-content {
+    font-size: 12pt; 
+  }
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.9);
+  /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content,
+#caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+footer {
+  margin-top: 20px;
+  background: rgb(27, 27, 31);
+  //display: block;
+  .icon{
+    font-size: 40px;
+  }
+}
