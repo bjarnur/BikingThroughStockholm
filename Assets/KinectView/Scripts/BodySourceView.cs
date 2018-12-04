@@ -12,6 +12,7 @@ public class BodySourceView : MonoBehaviour
     public GameObject BodySourceManager;
     public float footHigh;
     public float footLow;
+    public float detectionThreshold;
 
     private float cyclingSpeed = 0.0f;
     private bool isLeftFootUp = false;
@@ -132,7 +133,7 @@ public class BodySourceView : MonoBehaviour
     private GameObject CreateBodyObject(ulong id)
     {
         GameObject body = new GameObject("Body:" + id);
-        body.SetActive(false);
+        //body.SetActive(false);
         
         // Create joints
         //foreach (Kinect.JointType joint in _joints)
@@ -183,8 +184,10 @@ public class BodySourceView : MonoBehaviour
             
             Transform jointObj = bodyObject.transform.Find(jt.ToString());
             jointObj.localPosition = GetVector3FromJoint(sourceJoint);
-            if(jt == Kinect.JointType.FootLeft)
+            //Debug.Log("body outside " + body.TrackingId);
+            if (jt == Kinect.JointType.FootLeft && jointObj.localPosition.x >= detectionThreshold)
             {
+                //Debug.Log("body inside " + body.TrackingId);
                 manageCyclingTimes(jointObj.localPosition);
                 //-4.2 (Down) -2.1 (Up) -> set the threshold at 3
             }
@@ -204,7 +207,7 @@ public class BodySourceView : MonoBehaviour
     }
     /****** Function to calculate the speed ********/
     private void manageCyclingTimes(Vector3 cyclingLocalPosition) {
-        //Debug.Log("foot height " + cyclingLocalPosition.y);
+        //Debug.Log("foot height " + cyclingLocalPosition.y + "foot X " + cyclingLocalPosition.x + "foot Z " + cyclingLocalPosition.z);
         if (cyclingLocalPosition.y < footLow && isLeftFootUp) {
             isLeftFootUp = false;
             calculateCyclingSpeed(); // We call here the speed func. This will use the previousTimeSpent and the current value of timeSpent
