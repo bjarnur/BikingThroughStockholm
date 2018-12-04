@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class ConfettiController : MonoBehaviour {
 
-    [SerializeField] private float gravity;
-
     private Vector3 linearVelocity;
     private Vector3 angularVelicoty;
+    
 
 	void Start ()
     {
+        initialize_particle();
         linearVelocity = InitializeLinearVelocity();
         angularVelicoty = InitializeAngularVelocity();
+
+        BoxCollider bc = GetComponent<BoxCollider>();
+        Vector3 maxBounds = bc.bounds.max;
+        Vector3 minBounds = bc.bounds.min;
     }
 	
 	void Update ()
@@ -20,6 +24,31 @@ public class ConfettiController : MonoBehaviour {
         transform.position += linearVelocity * Time.deltaTime;
         transform.Rotate(angularVelicoty);
 	}
+
+    private void initialize_particle()
+    {
+        //Randomize particle color 
+        Renderer renderer = GetComponent<Renderer>();
+        renderer.material.color = ColorTable.GetRandom();
+
+        //Randomize starting rotation
+        int rand = Random.Range(0, 4);
+        switch(rand)
+        {
+            case 0:
+                transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                break;
+            case 1:
+                transform.rotation = Quaternion.Euler(90.0f, 0.0f, 0.0f);
+                break;
+            case 2:
+                transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
+                break;
+            case 3:
+                transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
+                break;
+        }        
+    }
 
     private Vector3 InitializeLinearVelocity()
     {
