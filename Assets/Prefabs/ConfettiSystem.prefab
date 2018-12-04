@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1321607868655822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4581232, y: 6.985133, z: -1.9175072}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,8 +51,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1085.3467, y: 75.44888, z: 31.455418}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1085.3467, y: 75.44888, z: 879.48175}
+  m_Center: {x: 0, y: 0, z: 424.01315}
 --- !u!114 &114592811394908604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -64,8 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a44aae8598e3240b10f272e63ac733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  burst: 0
-  numberOfParticles: 200
+  burst: 1
+  numberOfParticles: 400
   systemLife: 12
   particleLife: 7
   confettiPrefab: {fileID: 1987079080295664, guid: bb4064826753df64e968716ecd2e1420,
