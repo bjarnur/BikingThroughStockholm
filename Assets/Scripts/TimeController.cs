@@ -88,8 +88,10 @@ public class TimeController : MonoBehaviour {
         PrepareMilestonePanel();
         List<GameObject> fireworks = LaunchFireworks();
 
-        //TODO: Dynamically offset the particle system location
-        Vector3 offset = new Vector3(200f, 75f, -300);
+        float offsetX = confettiSystemPrefab.GetComponent<BoxCollider>().size.x;
+        float offsetY = confettiSystemPrefab.GetComponent<BoxCollider>().size.y;
+        float offsetZ = confettiSystemPrefab.GetComponent<BoxCollider>().size.z;
+        Vector3 offset = new Vector3(offsetX / 4, offsetY * 3, -offsetZ / 2);
         GameObject confetti = Instantiate(confettiSystemPrefab, camera.transform.position + offset, Quaternion.identity);
 
         bool soundPlayed = false;

@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   burst: 1
-  numberOfParticles: 400
+  numberOfParticles: 600
   systemLife: 12
   particleLife: 7
   confettiPrefab: {fileID: 1987079080295664, guid: bb4064826753df64e968716ecd2e1420,
