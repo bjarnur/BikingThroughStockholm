@@ -11,6 +11,7 @@ public class TimeController : MonoBehaviour {
     [SerializeField] private GameObject milestonePanel;
     [SerializeField] private GameObject timePanel;
     [SerializeField] private GameObject fireworkPrefab;
+    [SerializeField] private GameObject confettiSystemPrefab;
 
     [SerializeField] private AudioSource fireworkAudioSource;
 
@@ -85,6 +86,10 @@ public class TimeController : MonoBehaviour {
     {        
         PrepareMilestonePanel();
         List<GameObject> fireworks = LaunchFireworks();
+
+        GameObject confetti = Instantiate(confettiSystemPrefab, transform, false);
+        RectTransform rect = GetComponent<RectTransform>();
+        confetti.transform.position += new Vector3(0, rect.offsetMax.y / 2, 0);
 
         bool soundPlayed = false;
         float timeActive = 0.0f;

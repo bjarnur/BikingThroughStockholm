@@ -63,7 +63,7 @@ public class ConfettiSystem : MonoBehaviour {
             {
                 Destroy(child.gameObject);
             }
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
 

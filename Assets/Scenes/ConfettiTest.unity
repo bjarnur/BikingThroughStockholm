@@ -4810,6 +4810,57 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -87.65, y: 0, z: 0}
+--- !u!1001 &936158713
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4067320123509918, guid: d7a56f1196669854b917526bb2ffb271, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.4581232
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067320123509918, guid: d7a56f1196669854b917526bb2ffb271, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 6.985133
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067320123509918, guid: d7a56f1196669854b917526bb2ffb271, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1.9175072
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067320123509918, guid: d7a56f1196669854b917526bb2ffb271, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067320123509918, guid: d7a56f1196669854b917526bb2ffb271, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067320123509918, guid: d7a56f1196669854b917526bb2ffb271, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067320123509918, guid: d7a56f1196669854b917526bb2ffb271, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067320123509918, guid: d7a56f1196669854b917526bb2ffb271, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1321607868655822, guid: d7a56f1196669854b917526bb2ffb271, type: 2}
+      propertyPath: m_Name
+      value: ConfettiSystem (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114592811394908604, guid: d7a56f1196669854b917526bb2ffb271,
+        type: 2}
+      propertyPath: burst
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d7a56f1196669854b917526bb2ffb271, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1039899176
 GameObject:
   m_ObjectHideFlags: 0
@@ -4917,62 +4968,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.2449493, y: 1, z: 1}
   m_Center: {x: 1.1224744, y: 0, z: 0}
---- !u!1 &2063356735
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2063356736}
-  - component: {fileID: 2063356738}
-  - component: {fileID: 2063356737}
-  m_Layer: 0
-  m_Name: ConfettiSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2063356736
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2063356735}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4581232, y: 6.985133, z: -1.9175072}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2063356737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2063356735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00a44aae8598e3240b10f272e63ac733, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  burst: 0
-  numberOfParticles: 200
-  systemLife: 12
-  particleLife: 7
-  confettiPrefab: {fileID: 1987079080295664, guid: bb4064826753df64e968716ecd2e1420,
-    type: 2}
---- !u!65 &2063356738
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2063356735}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 7.2171288, y: 1, z: 1}
-  m_Center: {x: 2.5548582, y: 0, z: 0}

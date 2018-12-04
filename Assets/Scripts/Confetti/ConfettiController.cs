@@ -53,9 +53,9 @@ public class ConfettiController : MonoBehaviour {
 
     private Vector3 InitializeLinearVelocity()
     {
-        float x = Random.Range(0.0f, 1.0f);
-        float z = Random.Range(0.0f, 0.5f);
-        float y = Random.Range(1.0f, 3.0f);
+        float x = Random.Range(0.0f, 20.0f);
+        float z = Random.Range(0.0f, 10.0f);
+        float y = Random.Range(20.0f, 60.0f);
 
         bool xNegate = Random.Range(1, 3) == 1;
         bool yNegate = Random.Range(1, 3) == 1;
@@ -72,13 +72,17 @@ public class ConfettiController : MonoBehaviour {
     {
         float xFactor = Random.Range(1, 3);
         float zFactor = Random.Range(1, 4);
+
         bool xNegate = Random.Range(1, 3) == 1;
         bool yNegate = Random.Range(1, 3) == 1;
+        bool highSpin = Random.Range(0, 10) == 1;
 
         if (xNegate)
             xFactor *= -1;
         if (yNegate)
             zFactor *= -1;
+        if (highSpin)
+            zFactor *= 5;
 
         return new Vector3(xFactor, 0.0f, zFactor);
     }
