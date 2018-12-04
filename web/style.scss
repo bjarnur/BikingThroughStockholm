@@ -85,7 +85,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   background: url('pics/filter.png'), url('pics/Biking_demo.jpg');
-  //background: url('pics/menu.png');
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 
@@ -219,8 +219,13 @@ html, body {
 
     .gametitle {
       margin-right: 20px;
-      font-size: 52pt;
-      line-height: 52pt;
+      font-size: 52pt !important;
+      line-height: 52pt !important;
+
+      div{
+        font-size: 32pt !important;
+        line-height: 32pt !important;
+      }
 
       .subtitle {
         font-size: 36pt;
@@ -241,8 +246,8 @@ html, body {
 
     .gametitle {
       margin-right: 20px;
-      font-size: 52pt;
-      line-height: 52pt;
+      font-size: 42pt !important;
+      line-height: 42pt !important;
 
       .subtitle {
         font-size: 36pt;
