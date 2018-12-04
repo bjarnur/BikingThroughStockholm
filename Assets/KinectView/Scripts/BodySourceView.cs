@@ -13,6 +13,7 @@ public class BodySourceView : MonoBehaviour
     public float footHigh;
     public float footLow;
     public float detectionThreshold;
+    public bool doSetup = true;
 
     private float cyclingSpeed = 0.0f;
     private bool isLeftFootUp = false;
@@ -20,6 +21,11 @@ public class BodySourceView : MonoBehaviour
     private float previousTimeSpent = 0.0f;
     private float speedFactor = 2.5f;
     private RhythmTracker rhythmTracker;
+
+    private bool setupDone = false;
+    private float maxHeight = -100f;
+    private float minHeight = 100f;
+    private int count = 0;
 
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private List<Kinect.JointType> _joints = new List<Kinect.JointType>
@@ -188,6 +194,10 @@ public class BodySourceView : MonoBehaviour
             if (jt == Kinect.JointType.FootLeft && jointObj.localPosition.x >= detectionThreshold)
             {
                 //Debug.Log("body inside " + body.TrackingId);
+                if (!setupDone && doSetup)
+                {
+                    SetupPedal(jointObj.localPosition);
+                }
                 manageCyclingTimes(jointObj.localPosition);
                 //-4.2 (Down) -2.1 (Up) -> set the threshold at 3
             }
@@ -214,7 +224,7 @@ public class BodySourceView : MonoBehaviour
             previousTimeSpent = timeSpent; // THen we change the previousTimeSpent value for the next iteration
             timeSpent = 0.0f;
             Debug.Log("DOWN");
-            rhythmTracker.UpdateRhythm();
+            //rhythmTracker.UpdateRhythm();
         }
         else if (cyclingLocalPosition.y > footHigh && !isLeftFootUp) {
             isLeftFootUp = true;
@@ -234,6 +244,22 @@ public class BodySourceView : MonoBehaviour
         return cyclingSpeed;
     }
 
+    public void SetupPedal(Vector3 footPos)
+    {
+        maxHeight = footPos.y > maxHeight ? footPos.y : maxHeight;
+        minHeight = footPos.y < minHeight ? footPos.y : minHeight;
+        count++;
+        if (count == 500)
+        {
+            print("Max: " + maxHeight);
+            print("Min: " + minHeight);
+
+            footHigh = maxHeight - 1f; 
+            footLow = minHeight + 1f;
+
+            setupDone = true;
+        }
+    }
     
     /**********************************************/
 

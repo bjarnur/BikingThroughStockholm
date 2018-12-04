@@ -1175,12 +1175,12 @@ Prefab:
     - target: {fileID: 114486811258129670, guid: 113eafac8b5f6984ebd9c12a283415db,
         type: 2}
       propertyPath: footLow
-      value: -4
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 114486811258129670, guid: 113eafac8b5f6984ebd9c12a283415db,
         type: 2}
       propertyPath: footHigh
-      value: -2
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 114486811258129670, guid: 113eafac8b5f6984ebd9c12a283415db,
         type: 2}
