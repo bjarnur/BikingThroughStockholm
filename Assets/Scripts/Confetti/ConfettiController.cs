@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ConfettiController : MonoBehaviour {
 
     private Vector3 linearVelocity;
@@ -79,7 +80,6 @@ public class ConfettiController : MonoBehaviour {
         if (yNegate)
             zFactor *= -1;
 
-        Debug.Log("speed: " + new Vector3(xFactor, 0.0f, zFactor));
         return new Vector3(xFactor, 0.0f, zFactor);
     }
 }
