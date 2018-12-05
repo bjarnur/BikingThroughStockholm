@@ -17,7 +17,7 @@ public class PointsPath : MonoBehaviour {
         AddPoint(Vector3.zero);
         for (int i = 1; i < 10; i++)
         {
-            AddPoint(10 * new Vector3(Mathf.Cos(i), Random.Range(0, 3f), Random.Range(-0.5f, 0.5f) + i));
+            AddPoint(10 * new Vector3(Mathf.Cos(i), 0, Random.Range(-0.5f, 0.5f) + i));
         }
         for (float i = 0.1f; i < 1; i += 0.1f)
         {
@@ -114,7 +114,7 @@ public class PointsPath : MonoBehaviour {
 
         foreach (Vector3 point in keyPoints)
         {
-            Gizmos.DrawSphere(point, 0.3f);
+            Gizmos.DrawWireSphere(point, 1f);
         }
 
         for (int i = 0; i < keyPoints.Count - 1; i++)
