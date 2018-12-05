@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx creator="Wikiloc - https://www.wikiloc.com" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>Wikiloc - Video recording - test</name>
+    <author>
+      <name>Sonia Camacho</name>
+      <link href="https://www.wikiloc.com/wikiloc/user.do?id=2239061">
+        <text>Sonia Camacho on Wikiloc</text>
+      </link>
+    </author>
+    <link href="https://www.wikiloc.com/cycling-trails/video-recording-test-31087027">
+      <text>Video recording - test on Wikiloc</text>
+    </link>
+    <time>2018-12-05T11:19:27Z</time>
+  </metadata>
+  <trk>
+    <name>Video recording - test</name>
+    <cmt></cmt>
+    <desc></desc>
+    <trkseg>
+      <trkpt lat="59.400190" lon="18.062886">
+        <ele>10.024</ele>
+        <time>2018-12-05T11:20:27Z</time>
+      </trkpt>
+      <trkpt lat="59.400462" lon="18.062958">
+        <ele>10.004</ele>
+        <time>2018-12-05T11:20:47Z</time>
+      </trkpt>
+      <trkpt lat="59.400615" lon="18.063001">
+        <ele>10.014</ele>
+        <time>2018-12-05T11:21:07Z</time>
+      </trkpt>
+      <trkpt lat="59.400771" lon="18.063012">
+        <ele>10.008</ele>
+        <time>2018-12-05T11:21:27Z</time>
+      </trkpt>
+      <trkpt lat="59.400898" lon="18.062980">
+        <ele>10.055</ele>
+        <time>2018-12-05T11:21:47Z</time>
+      </trkpt>
+      <trkpt lat="59.401020" lon="18.062905">
+        <ele>10.093</ele>
+        <time>2018-12-05T11:22:07Z</time>
+      </trkpt>
+      <trkpt lat="59.401085" lon="18.062945">
+        <ele>10.052</ele>
+        <time>2018-12-05T11:22:27Z</time>
+      </trkpt>
+      <trkpt lat="59.401154" lon="18.063055">
+        <ele>10.010</ele>
+        <time>2018-12-05T11:22:47Z</time>
+      </trkpt>
+      <trkpt lat="59.401193" lon="18.063130">
+        <ele>10.079</ele>
+        <time>2018-12-05T11:23:07Z</time>
+      </trkpt>
+      <trkpt lat="59.401244" lon="18.063262">
+        <ele>10.052</ele>
+        <time>2018-12-05T11:23:27Z</time>
+      </trkpt>
+    </trkseg>
+  </trk></gpx>
