@@ -23,9 +23,7 @@
           STOCKHOLM
         </div>
         <div class="outlined">
-          Virtual-Reality simulator
-          <!-- <br>
-          Created for the course AGI18 at KTH -->
+          An augmented virtuality experience aiming to gamify exercise
         </div>
       </div>
     </section>
@@ -37,7 +35,15 @@
               GOALS &amp MOTIVATION 
           </div> -->
           <div  class="text-content">
-              
+              <p>
+              So, have you ever dreamt about biking on the streets of Stockholm Sweden? Right now you can, from the comfort of your local spinning hall! <i>Biking Through Stockholm</i> offers you the opportunity to experience a virtual bike ride through Stockholm, with the help of Virtual Reality technology. 
+              </p>
+              <p>
+              While you bike we keep track of your performance throughout the session. A part of the experience are challenges related to time spent biking, and training intensity, designed to help you get the most of your workout. See you on the streets of Stockholm!
+              </p>
+              <p style="font-size: 14pt;">
+                This project was developed from September to early November 2018 as part of the DH2413 Advanced Graphics and Interaction course at KTH.
+              </p>
           </div>
           <div class="centered">
             <img src="web/pics/video-player.png" width="400" height="300" />
@@ -48,7 +54,15 @@
       <section>
         <div class="container">
           <div class="section-title">
-              TECHNOLOGIES USED
+            TECHNOLOGIES USED
+          </div>
+          <div class="text-content">
+              <p>
+              The project is an augmented virtuality experience that uses pre-recorded video, to simulate a bike ride through Stockholm. The pre-recorded footage is on fisheye format, recorded with the <i>Backbone</i> camera, which can be viewed in VR with an <i>Oculus Rift</i>. Finally the project uses <i>Kinect</i> to detect players’ movement, which serves as the main interaction medium. 
+              </p>
+              <p>
+              Since our project deals with physical activity, motivating the user is paramount. Therefore, we deployed “gameful design”, which strives to create an enjoyable interactive system. This has been done through purposeful gamification. To tie all of this together we used the <i>Unity</i> game engine. We had all worked with the engine before, and it made it easy for us to integrate all the different part of the project. 
+              </p>
           </div>
           <!-- <div v-html="technologies" class="text-content"></div> -->
           <div class="div-2">
@@ -69,7 +83,15 @@
             <div class="section-title">
                 CHALLENGES &amp OBSTACLES 
             </div>
-            <div v-html="challenges" class="text-content"></div>
+            <!--<div v-html="challenges" class="text-content">-->
+              <div class="text-content">
+                <p>
+                At the very start of the project we were tasked with finding creative ways of using the <i>Backbone</i> camera. Many of the challenges we have faced during the course of the project work are in some ways related to the camera. This includes everything from finding meaningful ways to incorporate the camera in our project to technical issues. For example we had to figure out how to convert the video format from fisheye to spherical. We experimented with some tools for this, but ultimately realised that Unity can take care of this for us, if we import the video correctly into our Unity project. 
+                </p>
+                <p>
+                Other technical challenges include working with our motion sensor, <i>Kinect</i>, and our VR hardware <i>Oculus Rift</i>. None of us had ever worked with this specific hardware before, so it was a learning experience. However, after the initial learning curve our experience of working with both the <i>Kinect</i> and the <i>Oculus</i> is quite positive. 
+                </p>
+            </div>
         </div>
       </section>
       <section>
@@ -77,7 +99,15 @@
           <div class="section-title">
               RELATED WORK
           </div>
-          <div v-html="relatedWork" class="text-content"></div>
+          <!--<div v-html="relatedWork" class="text-content">-->
+            <div class="text-content">
+            <p>
+            A big part of the inspiration behind <i>Biking Through Stockholm</i> project came from the project <a href="http://spinnulators.github.io/Spinnulator/"><i>Spinnulator</i></a>, which was developed by students in the Advanced Graphics and Interaction course in 2015. <i>Biking Through Stockholm</i> uses a similar hardware setup, with the addition of VR. Other differences between the two projects include the usage of real world footage, which is used in <i>BTS</i>, and an even stronger emphasis on the gamification of exercise, which we try to create with various gameplay mechanics. 
+            </p>
+            <p>
+            <a href="https://everysight.com/"><i>Everysight</i></a> is another project that gamifies exercise on bicycles. In this case exercise is gamified with the help of AR glasses, where information is superimposed on the real world which the biker sees through the glasses. This is a commercial project, aimed towards more elite cyclists.
+            </p>
+          </div>
         </div>
         </section>
       <section>
@@ -86,7 +116,18 @@
               LESSONS LEARNED
           </div>
           <!-- <img src="pics/king5.png" alt="" width="20%" style="float:right"> -->
-          <div v-html="lessons" class="text-content"></div>
+          <!--<div v-html="lessons" class="text-content"></div>-->
+          <div class="text-content">
+            <p>
+            Many of the lessons learned relate in some way to the hardware we worked with, the <i>Oculus Rift</i>, <i>Kinect</i> and the <i>Backbone</i> camera. For instance, we need to be able to keep track of how our player moves their feet, while ignoring irrelevant noise going on in the background. This included both technical solutions, and being smart about where in a room to deploy the bike. 
+            </p>
+            <p>
+            Other challenges relate to other parts of the project. To implement interesting graphical effects we implemented our own shaders and particle systems. We also had to design the gamification elements of our application, for which we read up on gamification on a higher level. 
+            </p>
+            <p>
+            This is the second project this particular group worked on together, and at the start of the project we were already quite used to working together. This meant that, in general, the implementation went smoother and faster. A main difference in our way of work, compared to the previous project we worked on together, The King of the Cube, is that we worked in a more agile way this time, using week-long sprints. This turned out to be a great improvement, which made it easier for us to organize ourselves and prioritize tasks. 
+            </p>
+          </div>
         </div>
       </section>
       <section id="gallery">
