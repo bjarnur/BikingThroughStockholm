@@ -17,11 +17,11 @@ public class PointsPath : MonoBehaviour {
         AddPoint(Vector3.zero);
         for (int i = 1; i < 10; i++)
         {
-            AddPoint(10 * new Vector3(Mathf.Cos(i), 0, Random.Range(-0.5f, 0.5f) + i));
+            AddPoint(10 * new Vector3(i, 0, Mathf.Cos(i)));
         }
         for (float i = 0.1f; i < 1; i += 0.1f)
         {
-            AddPickupSerie(i, Random.Range(1, 5), 1.5f, Random.value < 0.5f ? PathPosition.LEFT : PathPosition.RIGHT);
+            AddPickupSerie(i, Random.Range(2, 5), 1.5f, Random.value < 0.5f ? PathPosition.LEFT : PathPosition.RIGHT);
         }
     }
 
