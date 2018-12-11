@@ -20,7 +20,8 @@ public class PathFollower : MonoBehaviour {
         GoToNextPoint();
     }
 
-    void Start () {
+    void Start ()
+    {
         Reset();
     }
 
@@ -30,7 +31,7 @@ public class PathFollower : MonoBehaviour {
         {
             lastDir = lastDir * (1 - convergingSpeed) + wantedDir * convergingSpeed;
             transform.localPosition += lastDir * speed / 10f;
-            transform.LookAt(transform.position + lastDir);
+            //transform.LookAt(transform.position + lastDir);
             if (Vector3.Distance(transform.localPosition, path[nextPoint]) < 1f)
             {
                 GoToNextPoint();
@@ -47,6 +48,5 @@ public class PathFollower : MonoBehaviour {
             return;
         }
         wantedDir = (path[nextPoint] - path[nextPoint - 1]).normalized;
-        //transform.LookAt(path[nextPoint]);
     }
 }
