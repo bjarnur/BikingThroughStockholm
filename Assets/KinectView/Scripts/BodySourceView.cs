@@ -14,6 +14,11 @@ public class BodySourceView : MonoBehaviour
     public float footLow;
     public float detectionThreshold;
     public bool doSetup = true;
+    //public bool isTracking = false;
+
+    private Vector3 prevFootPosition = Vector3.zero;
+    private LinkedList<float> footMotionData;
+    private int maxSizeList = 20; //Check this value
 
     private float cyclingSpeed = 0.0f;
     private bool isLeftFootUp = false;
@@ -224,7 +229,7 @@ public class BodySourceView : MonoBehaviour
             previousTimeSpent = timeSpent; // THen we change the previousTimeSpent value for the next iteration
             timeSpent = 0.0f;
             Debug.Log("DOWN");
-            //rhythmTracker.UpdateRhythm();
+            rhythmTracker.UpdateRhythm();
         }
         else if (cyclingLocalPosition.y > footHigh && !isLeftFootUp) {
             isLeftFootUp = true;
@@ -233,6 +238,24 @@ public class BodySourceView : MonoBehaviour
             timeSpent = 0.0f;
             Debug.Log("UP");
         }
+
+        Vector3 footPosition = cyclingLocalPosition;
+        Vector3 distVector = footPosition - prevFootPosition;
+
+        float dist = distVector.magnitude * 6f; //Check this value
+        //Store value removing outliers
+        if(dist < 50f) //Check this value
+        {
+            footMotionData.AddFirst(dist);
+            if(footMotionData.Count > maxSizeList)
+            {
+                footMotionData.RemoveLast();
+            }
+        }
+        prevFootPosition = footPosition;
+
+        float speed = GetAverage(footMotionData);
+        //Debug.Log("Speed: " + speed);
 
     }
     private void calculateCyclingSpeed() {
@@ -260,7 +283,28 @@ public class BodySourceView : MonoBehaviour
             setupDone = true;
         }
     }
-    
+
+    // Get the average of all values in the list
+    public float GetAverage(LinkedList<float> motionDataList)
+    {
+
+        if (motionDataList.Count == 0)
+        {
+            return 0f;
+        }
+
+        float average = 0f;
+
+        foreach (float motionData in motionDataList)
+        {
+            average += motionData;
+        }
+
+        average = average / motionDataList.Count;
+
+        return average;
+    }
+
     /**********************************************/
 
     private static Color GetColorForState(Kinect.TrackingState state)
