@@ -2,49 +2,76 @@
 {
 	Properties
 	{
-		
+		_PlayerPos("Player position", Vector) = (0, 0, 0, 0)
+		_FadeInValue("Fade in Value", float) = 100.0
+		_FadeDuration("Fade duration", float) = 300.0
 	}
 	SubShader
 	{
-		Tags { "RenderType"="Opaque" }
+		//Tags { "RenderType"="Opaque" }
+		Tags{ "Queue" = "Transparent" "RenderType" = "Transparent" }
+
+		ZWrite Off
+		Blend SrcAlpha OneMinusSrcAlpha
+
 
 		Pass
 		{
 			CGPROGRAM
 			#pragma vertex vert
-			#pragma fragment frag
-			
+			#pragma fragment frag			
 			#include "UnityCG.cginc"
 
 			struct appdata
 			{
 				float4 vertex : POSITION;
-				float2 uv : TEXCOORD0;
 			};
 
-			struct v2f
+			struct vertToFrag
 			{
-				float2 uv : TEXCOORD0;
 				float4 vertex : SV_POSITION;
+				float3 worldPosition : TEXCOORD1;
 			};
 
-			sampler2D _MainTex;
-			float4 _MainTex_ST;
+			Vector _PlayerPos;
+			float _FadeInValue;
+			float _FadeDuration;
 			
-			v2f vert (appdata v)
+			vertToFrag vert (appdata v)
 			{
-				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-				return o;
+				vertToFrag output;				
+				output.vertex = UnityObjectToClipPos(v.vertex);
+
+				float3 worldPos = mul(unity_ObjectToWorld, output.vertex).xyz;
+				output.worldPosition = worldPos;
+
+				return output;
 			}
 			
-			fixed4 frag (v2f i) : SV_Target
+			fixed4 frag (vertToFrag i) : SV_Target
 			{
-				// sample the texture
-				//fixed4 col = tex2D(_MainTex, i.uv);
-				fixed4 col = fixed4(1, 0, 0, 1);
-				return col;
+				float dist = distance(i.worldPosition, _PlayerPos);
+				
+				if(dist < _FadeInValue)
+				{
+					fixed4 col;
+					col = fixed4(1, 0.84, 0, 1);
+					return col;
+				}
+				else if (dist > _FadeInValue)
+				{
+					fixed4 col;
+					float alphaV = abs((dist - _FadeInValue) / _FadeDuration);
+					col = fixed4(1, 0.84, 0, alphaV);
+					return col;
+				}
+				else if(dist > _FadeInValue + _FadeDuration)
+				{ 
+					fixed4 col;
+					col = fixed4(1, 0.84, 1, 0);
+					return col;
+				}	
+				return fixed4(1, 0, 0, 1);
 			}
 			ENDCG
 		}
