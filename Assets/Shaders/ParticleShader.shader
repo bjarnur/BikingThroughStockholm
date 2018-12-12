@@ -3,12 +3,11 @@
 	Properties
 	{
 		_PlayerPos("Player position", Vector) = (0, 0, 0, 0)
-		_FadeInValue("Fade in Value", float) = 100.0
-		_FadeDuration("Fade duration", float) = 300.0
+		_FadeInValue("Fade in Value", float) = 40.0
+		_FadeDuration("Fade duration", float) = 50.0
 	}
 	SubShader
 	{
-		//Tags { "RenderType"="Opaque" }
 		Tags{ "Queue" = "Transparent" "RenderType" = "Transparent" }
 
 		ZWrite Off
@@ -50,28 +49,25 @@
 			
 			fixed4 frag (vertToFrag i) : SV_Target
 			{
+				fixed4 col;
 				float dist = distance(i.worldPosition, _PlayerPos);
 				
-				if(dist < _FadeInValue)
-				{
-					fixed4 col;
-					col = fixed4(1, 0.84, 0, 1);
-					return col;
-				}
+				//Completely transparent
+				if (dist > _FadeInValue + _FadeDuration)
+					col = fixed4(1, 0.84, 1, 0);
+				
+				//Fade in
 				else if (dist > _FadeInValue)
 				{
-					fixed4 col;
 					float alphaV = abs((dist - _FadeInValue) / _FadeDuration);
-					col = fixed4(1, 0.84, 0, alphaV);
-					return col;
+					col = fixed4(1, 0.84, 0, 1 - alphaV);
 				}
-				else if(dist > _FadeInValue + _FadeDuration)
-				{ 
-					fixed4 col;
-					col = fixed4(1, 0.84, 1, 0);
-					return col;
-				}	
-				return fixed4(1, 0, 0, 1);
+
+				//Completely opaque
+				else				
+					col = fixed4(1, 0.84, 0, 1);
+
+				return col;				
 			}
 			ENDCG
 		}

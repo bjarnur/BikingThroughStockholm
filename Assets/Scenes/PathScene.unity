@@ -685,6 +685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gatherer: {fileID: 534669906}
   counterText: {fileID: 441570205}
+  count: 0
 --- !u!114 &354927984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,7 +819,7 @@ VideoPlayer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 444289119}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: ff3757d43f3f44f7bb38f360b67c29fd, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 214cab07a8d44654781533210d9836d2, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 534669904}
@@ -948,7 +949,7 @@ GameObject:
   - component: {fileID: 534669906}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1836,6 +1837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skyboxVideoPlayer: {fileID: 444289120}
   cointCounter: {fileID: 354927981}
+  endingMessage: {fileID: 0}
 --- !u!1 &1929264700
 GameObject:
   m_ObjectHideFlags: 0
