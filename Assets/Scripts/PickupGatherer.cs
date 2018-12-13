@@ -20,6 +20,7 @@ public class PickupGatherer : MonoBehaviour {
 	
 	void Update () {
         RaycastHit hit;
+
         if (Physics.Raycast(transform.position, transform.forward, out hit, distance))
         {
             GameObject objectHit = hit.transform.gameObject;
