@@ -34,7 +34,7 @@ public class MainMenu : MonoBehaviour {
     }
     public void PlayGame()
     {
-        SceneManager.LoadScene("BikeScene");
+        SceneManager.LoadScene("PathScene");
     }
 
 }

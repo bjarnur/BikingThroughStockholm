@@ -3,28 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class EndgameController : MonoBehaviour {
+public class EndgameController : Singleton<EndgameController> {
 
     public VideoPlayer skyboxVideoPlayer;
-    public GameObject cointCounter;
+    public CoinCounter coinCounter;
     public Text endingMessage;
+    protected EndgameController() { }
+    public int numOfSecAfterEndPath = 5;
 
-    private SortedList<int, string> rankings;
+    PathFollower player;
 
-	// Use this for initialization
-	void Start () {
+    private float speedAverage = 0.0f;
+    private List<int> timeRanking = new List<int>();
+
+    private void Awake() {
+        
+    }
+
+    void Start () {
+        player = GetComponent<PathFollower>();
         skyboxVideoPlayer.loopPointReached += EndReached;
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-       
+        if (player.IsDone()) {
+            GameOver();
+        }
 	}
 
     void EndReached(UnityEngine.Video.VideoPlayer vp)
     {
-        endingMessage.text = "End of you journey. You collected " + cointCounter.GetComponent<CoinCounter>().count.ToString() + " coins";
-        vp.Stop();
+       
+    }
+
+    public void GameOver() {
+        endingMessage.text = "End of you journey. You collected " + coinCounter.GetComponent<CoinCounter>().count.ToString() + " coins";
+        StartCoroutine(WaitFewSeconds());
+        //Show the Ranking here
+        //Add the average speed to the ranking here
+    }
+
+    private void resetNewPlayer() {
+        //Maybe reset the videoplayer here
+        endingMessage.text = "";
+        speedAverage = 0.0f;
+    }
+
+    public void TrackUserSpeed(float speed) {
+         
+    }
+
+    IEnumerator WaitFewSeconds() {
+        yield return new WaitForSeconds(numOfSecAfterEndPath);
+        skyboxVideoPlayer.Stop(); // We stop the video
+        SceneManager.LoadScene("MainMenu");
+        resetNewPlayer();
+        print("We waited 5 seconds :D");
     }
 }

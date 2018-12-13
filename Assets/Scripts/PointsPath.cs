@@ -3,25 +3,65 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PointsPath : MonoBehaviour {
+
     public GameObject pickupPrefab;
     public float rowOffset = 1;
+    public bool useRealPath = false;
 
     List<Vector3> keyPoints;
     float totalDistance;
+
+    public float GetTotalDistance()
+    {
+        return totalDistance;
+    }
 
     private void Awake()
     {
         keyPoints = new List<Vector3>();
         totalDistance = 0;
-
         AddPoint(Vector3.zero);
-        for (int i = 1; i < 10; i++)
+
+        if (useRealPath)
         {
-            AddPoint(10 * new Vector3(i, 0, Mathf.Cos(i)));
+            GPSConverter coordConverter = GetComponent<GPSConverter>();
+            List<Vector3> gpsCoords = coordConverter.GetPathPoints();
+            Debug.Log("Number of gps points: " + gpsCoords.Count);
+            for(int i = 0; i < gpsCoords.Count; i++)
+            {                
+                Vector3 coord = gpsCoords[i];
+                Debug.Log("Coord: " + coord);
+                coord = Vector3.right * coord.magnitude;
+                AddPoint(coord);
+
+                //GameObject pickup = Instantiate<GameObject>(pickupPrefab);
+                //pickup.transform.position = coord;
+            }
+        }
+
+        else
+        { 
+            for (int i = 1; i < 10; i++)
+            {
+                AddPoint(10 * new Vector3(i, 0, Mathf.Cos(i)));
+            }
+            for (float i = 0.1f; i < 1; i += 0.1f)
+            {
+                AddPickupSerie(i, Random.Range(2, 5), 1.5f, Random.value < 0.5f ? PathPosition.LEFT : PathPosition.RIGHT);
+            }
+        }
+    }
+
+    public void RespawnPickups()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
         }
         for (float i = 0.1f; i < 1; i += 0.1f)
         {
-            AddPickupSerie(i, Random.Range(2, 5), 1.5f, Random.value < 0.5f ? PathPosition.LEFT : PathPosition.RIGHT);
+            float r = Random.value;
+            AddPickupSerie(i, Random.Range(2, 5), 1.5f, r < 0.33f ? PathPosition.LEFT : (r < 0.66f ? PathPosition.CENTER : PathPosition.RIGHT));
         }
     }
 
@@ -108,6 +148,7 @@ public class PointsPath : MonoBehaviour {
         return (this[nextPoint] - this[nextPoint - 1]).normalized;
     }
 
+    
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying) return;

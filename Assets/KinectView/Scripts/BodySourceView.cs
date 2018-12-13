@@ -16,23 +16,21 @@ public class BodySourceView : MonoBehaviour
     public bool doSetup = true;
     //public bool isTracking = false;
 
-    private Vector3 footPosition = Vector3.zero;
     private Vector3 prevFootPosition = Vector3.zero;
-    private LinkedList<float> footMotionData = new LinkedList<float>();
-    private int maxSizeList = 30; //Check this value
+    private LinkedList<float> footMotionData;
+    private int maxSizeList = 20; //Check this value
 
     private float cyclingSpeed = 0.0f;
     private bool isLeftFootUp = false;
     private float timeSpent = 0.0f;
-    
-    private float speedFactor = 10f;
+    private float previousTimeSpent = 0.0f;
+    private float speedFactor = 2.5f;
     private RhythmTracker rhythmTracker;
 
     private bool setupDone = false;
     private float maxHeight = -100f;
     private float minHeight = 100f;
     private int count = 0;
-    private int downcount = 0;
 
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private List<Kinect.JointType> _joints = new List<Kinect.JointType>
@@ -77,8 +75,6 @@ public class BodySourceView : MonoBehaviour
     void Start()
     {
         rhythmTracker = canvas.GetComponent<RhythmTracker>();
-        footMotionData.AddFirst(0f);
-        StartCoroutine(CheckSpeed());
     }
 
     void Update () 
@@ -139,13 +135,12 @@ public class BodySourceView : MonoBehaviour
                 {
                     _Bodies[body.TrackingId] = CreateBodyObject(body.TrackingId);
                 }
-                //timeSpent += Time.deltaTime;  // Maybe it's not the best place to set this, 2 bodies can cause to double count. Maybe for now it just works
+                timeSpent += Time.deltaTime;  // Maybe it's not the best place to set this, 2 bodies can cause to double count. Maybe for now it just works
                 RefreshBodyObject(body, _Bodies[body.TrackingId]);
             }
         }
-        timeSpent += Time.deltaTime;
     }
-
+    
     private GameObject CreateBodyObject(ulong id)
     {
         GameObject body = new GameObject("Body:" + id);
@@ -230,18 +225,43 @@ public class BodySourceView : MonoBehaviour
         //Debug.Log("foot height " + cyclingLocalPosition.y + "foot X " + cyclingLocalPosition.x + "foot Z " + cyclingLocalPosition.z);
         if (cyclingLocalPosition.y < footLow && isLeftFootUp) {
             isLeftFootUp = false;
-            //Debug.Log("DOWN");
+            calculateCyclingSpeed(); // We call here the speed func. This will use the previousTimeSpent and the current value of timeSpent
+            previousTimeSpent = timeSpent; // THen we change the previousTimeSpent value for the next iteration
+            timeSpent = 0.0f;
+            Debug.Log("DOWN");
+            rhythmTracker.UpdateRhythm();
         }
         else if (cyclingLocalPosition.y > footHigh && !isLeftFootUp) {
             isLeftFootUp = true;
-            //calculateCyclingSpeed();
-            //Debug.Log("UP");
+            calculateCyclingSpeed();
+            previousTimeSpent = timeSpent;
+            timeSpent = 0.0f;
+            Debug.Log("UP");
         }
 
+        Vector3 footPosition = cyclingLocalPosition;
+        Vector3 distVector = footPosition - prevFootPosition;
 
+        float dist = distVector.magnitude * 6f; //Check this value
+        //Store value removing outliers
+        if(dist < 50f) //Check this value
+        {
+            footMotionData.AddFirst(dist);
+            if(footMotionData.Count > maxSizeList)
+            {
+                footMotionData.RemoveLast();
+            }
+        }
+        prevFootPosition = footPosition;
 
-        footPosition = cyclingLocalPosition;
+        float speed = GetAverage(footMotionData);
+        EndgameController.Instance.TrackUserSpeed(speed);
+        //Debug.Log("Speed: " + speed);
 
+    }
+    private void calculateCyclingSpeed() {
+        cyclingSpeed = Mathf.Abs(timeSpent - previousTimeSpent) * speedFactor; // We get the difference in absolute val and we multiply it for some factor. This will have to be tuned.
+        //print(cyclingSpeed);
     }
 
     public float getCyclingSpeed() {
@@ -257,8 +277,6 @@ public class BodySourceView : MonoBehaviour
         {
             print("Max: " + maxHeight);
             print("Min: " + minHeight);
-            print("X: " + footPos.x);
-            print("Z: " + footPos.z);
 
             footHigh = maxHeight - 1f; 
             footLow = minHeight + 1f;
@@ -286,36 +304,6 @@ public class BodySourceView : MonoBehaviour
         average = average / motionDataList.Count;
 
         return average;
-    }
-
-    private float ComputeSpeed()
-    {
-        Vector3 distVector = footPosition - prevFootPosition;
-
-        float dist = distVector.magnitude; //Check this value
-        //Store value removing outliers
-        //Debug.Log(dist);
-        if (dist < 10f) //Check this value
-        {
-            footMotionData.AddFirst(dist);
-            if (footMotionData.Count > maxSizeList)
-            {
-                footMotionData.RemoveLast();
-            }
-        }
-        prevFootPosition = footPosition;
-
-        float speed = GetAverage(footMotionData);
-        rhythmTracker.UpdateRhythm(speed);
-        //Debug.Log("Speed: " + speed);
-        return speed;
-    }
-
-    IEnumerator CheckSpeed()
-    {
-        cyclingSpeed = ComputeSpeed();
-        yield return new WaitForSeconds(0.05f);
-        StartCoroutine(CheckSpeed());
     }
 
     /**********************************************/
