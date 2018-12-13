@@ -9,6 +9,7 @@ public class PickupGatherer : MonoBehaviour {
 
     public float distance;
     public float delay;
+    public AudioSource coinSound;
 
     GameObject last;
     float timeCounter;
@@ -38,6 +39,7 @@ public class PickupGatherer : MonoBehaviour {
                     //last.GetComponent<MeshRenderer>().material.SetInt("_IsPickingUp", 1);
                     if (timeCounter >= delay)
                     {
+                        coinSound.Play();
                         if (OnPickup != null)
                             OnPickup(objectHit);
                         Destroy(objectHit);

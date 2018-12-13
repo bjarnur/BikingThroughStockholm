@@ -21,7 +21,7 @@ public class RhythmTracker : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        progress = Mathf.Max(progress - 0.1f * Time.deltaTime, 0f);
+        //progress = Mathf.Max(progress - 0.1f * Time.deltaTime, 0f);
         if (Input.GetKeyDown("space"))
         {
             progress = Mathf.Min(progress + 0.1f, 1.0f);
@@ -50,6 +50,13 @@ public class RhythmTracker : MonoBehaviour
     public void UpdateRhythm()
     {
         progress = Mathf.Min(progress + 0.1f, 1.0f);
+        ProgressBar.fillAmount = progress;
+    }
+
+    public void UpdateRhythm(float speed)
+    {
+        //progress = Mathf.Min(progress + 0.1f, 1.0f);
+        progress = Mathf.Min(speed, 1.0f);
         ProgressBar.fillAmount = progress;
     }
 }
