@@ -102,13 +102,13 @@ public class RhythmTracker : MonoBehaviour
         switch(levelIdx)
         {
             case 0:
-                levelGoal = 0.2f;
+                levelGoal = 0.7f;
                 break;
             case 1:
                 levelGoal = 0.5f;
                 break;
             case 2:
-                levelGoal = 0.7f;
+                levelGoal = 0.2f;
                 break;
         }
 
