@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour {
 
     float timeCounter;
 
+
     void Update()
     {
         RaycastHit hit;
@@ -36,5 +37,7 @@ public class MainMenu : MonoBehaviour {
     {
         SceneManager.LoadScene("PathScene");
     }
+
+
 
 }

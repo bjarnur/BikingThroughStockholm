@@ -57,7 +57,7 @@ public class RhythmTracker : MonoBehaviour
             }
 
             if (timeLeft <= 0) {
-                //GameOver();
+                GameOver();
             }
         }
 
