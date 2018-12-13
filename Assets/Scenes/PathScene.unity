@@ -917,7 +917,7 @@ VideoPlayer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 444289119}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: e75f43d0b22fd154588e4700e4a75c2c, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: ff3757d43f3f44f7bb38f360b67c29fd, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 534669904}
@@ -1713,9 +1713,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'End of you journey!
-
-    You collected '
+  m_Text: 
 --- !u!222 &1079396795
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2041,6 +2039,7 @@ MonoBehaviour:
   skyboxVideoPlayer: {fileID: 444289120}
   coinCounter: {fileID: 354927983}
   endingMessage: {fileID: 1079396794}
+  numOfSecAfterEndPath: 5
 --- !u!1 &1929264700
 GameObject:
   m_ObjectHideFlags: 0
