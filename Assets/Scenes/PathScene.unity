@@ -991,7 +991,7 @@ VideoPlayer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 444289119}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: ff3757d43f3f44f7bb38f360b67c29fd, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 214cab07a8d44654781533210d9836d2, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 534669904}
@@ -1012,7 +1012,7 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 1
   m_WaitForFirstFrame: 1
@@ -1336,7 +1336,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a285f07dbc551984a9601dd6d9588dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materials: []
+  materials:
+  - {fileID: 2100000, guid: ca944f1c508344dfaa33aa31c9159d57, type: 2}
+  - {fileID: 2100000, guid: 0250a443acfa34540a10a8c2daf18402, type: 2}
   distance: 8
   delay: 0.2
   coinSound: {fileID: 534669908}
