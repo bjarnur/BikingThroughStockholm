@@ -9,14 +9,14 @@ public class GPSConverter : MonoBehaviour {
     private List<Vector3> pathPoints = new List<Vector3>();
     
     void Start () {
-        string GPSFile = "Assets/GPSTracks/track_YDXJ0035.xml";
-        FromGPSToXYZ(GPSFile, pathPointsGPS, pathPoints);
+        //string GPSFile = "Assets/GPSTracks/track_YDXJ0035.xml";
+        //FromGPSToXYZ(GPSFile, pathPointsGPS, pathPoints);
         //pathpoints: Final list with the coordinates of all points in the path converted to XYZ 
                       //and contained in "floor" plane
 
     }
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         if (!Application.isPlaying) return;
 
@@ -29,9 +29,10 @@ public class GPSConverter : MonoBehaviour {
         {
             Gizmos.DrawLine(pathPoints[i], pathPoints[i + 1]);
         }
-        Gizmos.DrawLine(Vector3.zero, pathPoints[0]);
+        if(pathPoints.Count > 0)
+            Gizmos.DrawLine(Vector3.zero, pathPoints[0]);
 
-    }
+    }*/
 
     void FromGPSToXYZ(string GPSFile, List<Vector2> pathPointsGPS, List<Vector3> pathPoints)
     {
@@ -69,7 +70,7 @@ public class GPSConverter : MonoBehaviour {
                     //Vector from the Earth's center to the first point in path
                     offset = new Vector3(x, y, z) - Vector3.zero;
                 }
-                pathPoints.Add(new Vector3(x, y, z) - offset);
+                pathPoints.Add((new Vector3(x, y, z) - offset) * -1);
 
             }
             else
@@ -91,6 +92,19 @@ public class GPSConverter : MonoBehaviour {
             //Final list with the coordinates of all points in the path
             pathPoints[i] = this.gameObject.transform.GetChild(i).position;
         }
+
+        transform.rotation = Quaternion.identity;
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
+    public List<Vector3> GetPathPoints()
+    {
+        string GPSFile = "Assets/GPSTracks/track_YDXJ0035.xml";
+        FromGPSToXYZ(GPSFile, pathPointsGPS, pathPoints);
+        //pathPoints.Reverse();
+        return pathPoints;
+    }
 }

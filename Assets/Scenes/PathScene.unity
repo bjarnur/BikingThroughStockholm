@@ -349,8 +349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b005eab8ab8806e4880fd6cc4d9d2c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardInterval: 5
-  rewardDuration: 3
+  rewardInterval: 30
+  rewardDuration: 5
   milestonePanel: {fileID: 1304168291}
   timePanel: {fileID: 645125787}
   fireworkPrefab: {fileID: 1891167574518262, guid: ebc032b4d4c6c614db915a99742237af,
@@ -928,7 +928,7 @@ VideoPlayer:
   m_RenderMode: 2
   m_AspectRatio: 2
   m_DataSource: 0
-  m_PlaybackSpeed: 1
+  m_PlaybackSpeed: 2
   m_AudioOutputMode: 2
   m_TargetAudioSources:
   - {fileID: 0}
@@ -1557,13 +1557,14 @@ GameObject:
   - component: {fileID: 1079396793}
   - component: {fileID: 1079396795}
   - component: {fileID: 1079396794}
+  - component: {fileID: 1079396796}
   m_Layer: 0
   m_Name: Endgame Message
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1079396793
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1608,7 +1609,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
-    m_Alignment: 5
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -1624,6 +1625,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1079396792}
   m_CullTransparentMesh: 0
+--- !u!114 &1079396796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1079396792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0d70e253278e54ba51612fc3579362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!21 &1187049041
 Material:
   serializedVersion: 6
@@ -1901,7 +1913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: {fileID: 1948960707}
-  speed: 0.5
+  duration: 30
   convergingSpeed: 0.1
 --- !u!4 &1649266706
 Transform:
@@ -1929,8 +1941,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skyboxVideoPlayer: {fileID: 444289120}
-  cointCounter: {fileID: 354927981}
-  endingMessage: {fileID: 0}
+  coinCounter: {fileID: 354927983}
+  endingMessage: {fileID: 1079396794}
 --- !u!1 &1929264700
 GameObject:
   m_ObjectHideFlags: 0
@@ -2010,6 +2022,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1948960708}
   - component: {fileID: 1948960707}
+  - component: {fileID: 1948960709}
   m_Layer: 0
   m_Name: MainPath
   m_TagString: Untagged
@@ -2031,6 +2044,7 @@ MonoBehaviour:
   pickupPrefab: {fileID: 1672604046169612, guid: a74ca3e52b597ad4d843d0e16f8f064f,
     type: 2}
   rowOffset: 3
+  useRealPath: 1
 --- !u!4 &1948960708
 Transform:
   m_ObjectHideFlags: 0
@@ -2044,3 +2058,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1948960709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1948960706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c471106ac0b2ef7408c8c948e0dc07f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

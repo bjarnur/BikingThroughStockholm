@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PathFollower : MonoBehaviour {
     public PointsPath path;
-    public float speed = 1f;
+    public int duration;
     public float convergingSpeed = 0.2f;
 
+    float speed;
     bool done;
     Vector3 wantedDir;
     Vector3 lastDir;
@@ -17,10 +18,18 @@ public class PathFollower : MonoBehaviour {
         done = false;
         nextPoint = 0;
         lastDir = (path[1] - path[0]).normalized;
+        speed = path.GetTotalDistance() / duration;
+        transform.localPosition = path[0];
+        path.RespawnPickups();
         GoToNextPoint();
     }
 
-    void Start ()
+    public bool IsDone()
+    {
+        return done;
+    }
+
+    void Start()
     {
         Reset();
     }
@@ -30,7 +39,7 @@ public class PathFollower : MonoBehaviour {
         if (!done)
         {
             lastDir = lastDir * (1 - convergingSpeed) + wantedDir * convergingSpeed;
-            transform.localPosition += lastDir * speed / 10f;
+            transform.localPosition += lastDir * speed * Time.deltaTime;
             //transform.LookAt(transform.position + lastDir);
             if (Vector3.Distance(transform.localPosition, path[nextPoint]) < 1f)
             {

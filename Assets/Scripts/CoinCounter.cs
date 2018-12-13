@@ -13,18 +13,21 @@ public class CoinCounter : MonoBehaviour {
 
 	void Start () {
         gatherer.OnPickup += OnPickup;
+        Reset();
+    }
+
+    public void Reset()
+    {
         count = 0;
         goal = GameObject.FindGameObjectsWithTag("Pickup").Length;
-        counterText.text = count + " / " + goal;
     }
 
     void OnPickup(GameObject pickup)
     {
         count++;
-        counterText.text = count + " / " + goal;
     }
 	
 	void Update () {
-		
-	}
+        counterText.text = count + " / " + goal;
+    }
 }
