@@ -26,7 +26,8 @@ public class PickupGatherer : MonoBehaviour {
                 if (objectHit == last)
                 {
                     timeCounter += Time.deltaTime;
-                    last.GetComponent<MeshRenderer>().material.color = new Color(251, 129, 8);
+                    //last.GetComponent<MeshRenderer>().material.color = new Color(251, 129, 8);
+                    last.GetComponent<MeshRenderer>().material.SetInt("_IsPickingUp", 1);
                     if (timeCounter >= delay)
                     {
                         if (OnPickup != null)
@@ -43,7 +44,8 @@ public class PickupGatherer : MonoBehaviour {
         } else
         {
             if (last != null)
-                last.GetComponent<MeshRenderer>().material.color = new Color(231, 189, 8);
+            last.GetComponent<MeshRenderer>().material.SetInt("_IsPickingUp", 0);
+            //last.GetComponent<MeshRenderer>().material.color = new Color(231, 189, 8);
             last = null;
         }
 	}

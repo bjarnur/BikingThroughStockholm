@@ -5,6 +5,7 @@
 		_PlayerPos("Player position", Vector) = (0, 0, 0, 0)
 		_FadeInValue("Fade in Value", float) = 40.0
 		_FadeDuration("Fade duration", float) = 50.0
+		_IsPickingUp("Is pickig up", int) = 0
 	}
 	SubShader
 	{
@@ -35,6 +36,7 @@
 			Vector _PlayerPos;
 			float _FadeInValue;
 			float _FadeDuration;
+			int _IsPickingUp;
 			
 			vertToFrag vert (appdata v)
 			{
@@ -67,7 +69,10 @@
 				else				
 					col = fixed4(1, 0.84, 0, 1);
 
-				return col;				
+				if (_IsPickingUp == 1)
+					col = fixed4(1, 0.2, 0.2, 1);
+
+				return col;		
 			}
 			ENDCG
 		}
