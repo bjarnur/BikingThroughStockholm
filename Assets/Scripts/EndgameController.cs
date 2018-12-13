@@ -39,7 +39,7 @@ public class EndgameController : Singleton<EndgameController> {
     }
 
     public void GameOver() {
-        endingMessage.text = "End of you journey. You collected " + coinCounter.GetComponent<CoinCounter>().count.ToString() + " coins";
+        endingMessage.text = "End of your journey. You collected " + coinCounter.GetComponent<CoinCounter>().count.ToString() + " coins";
         StartCoroutine(WaitFewSeconds());
         //Show the Ranking here
         //Add the average speed to the ranking here
