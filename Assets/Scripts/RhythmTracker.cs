@@ -8,9 +8,15 @@ public class RhythmTracker : MonoBehaviour
 {
 
     public Image ProgressBar;
+    public List<GameObject> targetBars;
+    public int levelDuration = 40;
+
+    private int levelIdx;
+    private float levelGoal;
     private float progress;
     private float loseTime = 5.0f;
     private float timeLeft;
+    private float switchTimer;
 
     private bool simulationStarted = false;
 
@@ -19,6 +25,11 @@ public class RhythmTracker : MonoBehaviour
     {
         timeLeft = loseTime;
         progress = 0.8f;
+
+        //Level 1, naturally
+        levelIdx = 2;
+        levelGoal = 0.2f;
+        switchTimer = 0.0f;
 	}
 	
 	// Update is called once per frame
@@ -36,7 +47,7 @@ public class RhythmTracker : MonoBehaviour
         if (simulationStarted)
         {
             ProgressBar.fillAmount = progress;
-            if (progress < 0.7f) {
+            if (progress < levelGoal) {
                 timeLeft -= Time.deltaTime;
                 ProgressBar.color = Color.red;
 
@@ -49,6 +60,10 @@ public class RhythmTracker : MonoBehaviour
                 GameOver();
             }
         }
+
+        switchTimer += Time.deltaTime;
+        if (switchTimer > levelDuration)
+            SwitchLevel();
     }
 
     private void GameOver() {
@@ -76,6 +91,28 @@ public class RhythmTracker : MonoBehaviour
         progress = Mathf.Min(speed, 1.0f);
         ProgressBar.fillAmount = progress;
 
+    }
+
+    private void SwitchLevel()
+    {
+        targetBars[levelIdx].SetActive(false);
+        levelIdx = Random.Range(0, 3);
+        targetBars[levelIdx].SetActive(true);
+
+        switch(levelIdx)
+        {
+            case 0:
+                levelGoal = 0.7f;
+                break;
+            case 1:
+                levelGoal = 0.5f;
+                break;
+            case 2:
+                levelGoal = 0.2f;
+                break;
+        }
+
+        switchTimer = 0.0f;
     }
 
     private void StartSimulation()
