@@ -44,7 +44,7 @@ public class RhythmTracker : MonoBehaviour
 	}
 
     private void GameOver() {
-        Debug.Log("Game Over");
+        EndgameController.Instance.GameOver();
     }
 
     public void UpdateRhythm()

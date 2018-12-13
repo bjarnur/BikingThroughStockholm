@@ -255,6 +255,7 @@ public class BodySourceView : MonoBehaviour
         prevFootPosition = footPosition;
 
         float speed = GetAverage(footMotionData);
+        EndgameController.Instance.TrackUserSpeed(speed);
         //Debug.Log("Speed: " + speed);
 
     }
