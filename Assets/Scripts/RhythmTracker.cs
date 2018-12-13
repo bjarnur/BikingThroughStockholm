@@ -8,6 +8,7 @@ public class RhythmTracker : MonoBehaviour
 {
 
     public Image ProgressBar;
+    public Image fadePanel;
     public List<GameObject> targetBars;
     public int levelDuration = 40;
 
@@ -19,6 +20,7 @@ public class RhythmTracker : MonoBehaviour
     private float switchTimer;
 
     private bool simulationStarted = false;
+    private float alpha = 0.0f;
 
 	// Use this for initialization
 	void Start ()
@@ -35,6 +37,7 @@ public class RhythmTracker : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        //videoRenderer.material.color = new Color(videoRenderer.material.color.r, videoRenderer.material.color.g, videoRenderer.material.color.b, 0.5f);
         //progress = Mathf.Max(progress - 0.1f * Time.deltaTime, 0f);
         if (Input.GetKeyDown("space"))
         {
@@ -50,16 +53,19 @@ public class RhythmTracker : MonoBehaviour
             if (progress < levelGoal) {
                 timeLeft -= Time.deltaTime;
                 ProgressBar.color = Color.red;
-
             } else {
                 timeLeft = loseTime;
                 ProgressBar.color = Color.green;
             }
 
+            alpha = (loseTime - Mathf.Max(timeLeft, 0.0f)) / loseTime;
+
             if (timeLeft <= 0) {
                 GameOver();
             }
         }
+
+        fadePanel.color = new Color(fadePanel.color.r, fadePanel.color.g, fadePanel.color.b, alpha);
 
         switchTimer += Time.deltaTime;
         if (switchTimer > levelDuration)
