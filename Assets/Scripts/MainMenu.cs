@@ -18,7 +18,6 @@ public class MainMenu : MonoBehaviour {
         Debug.DrawLine(gameCamera.transform.position, gameCamera.transform.forward*5000, Color.green);
         if (Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hit,5000))
         {
-            Debug.Log("HIT");
             GameObject objectHit = hit.transform.gameObject;
             if (objectHit.CompareTag("Button")) //Same counter is for all buttons right now...
             {
