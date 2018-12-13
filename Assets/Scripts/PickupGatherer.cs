@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PickupGatherer : MonoBehaviour {
-
-    public List<Material> materials = new List<Material>(2);
-
     public delegate void OnPickupDelegate(GameObject pickup);
     public event OnPickupDelegate OnPickup;
 
@@ -26,18 +23,10 @@ public class PickupGatherer : MonoBehaviour {
             GameObject objectHit = hit.transform.gameObject;
             if (objectHit.CompareTag("Pickup"))
             {
-                Debug.Log("ray hit");
                 if (objectHit == last)
                 {
-                    //Dissolve pickp
-                    objectHit.GetComponent<MeshRenderer>().material = materials[0];
-                    float dissolveValue = ((timeCounter/delay) * 2) - 1.0f;
-                    Debug.Log("dissolve value " + dissolveValue);
-                    objectHit.GetComponent<MeshRenderer>().material
-                        .SetFloat("Vector1_7D4954D9", (timeCounter - 1.0f));
-
                     timeCounter += Time.deltaTime;
-                    //last.GetComponent<MeshRenderer>().material.color = new Color(251, 129, 8);
+                    last.GetComponent<MeshRenderer>().material.color = new Color(251, 129, 8);
                     if (timeCounter >= delay)
                     {
                         if (OnPickup != null)
@@ -46,7 +35,7 @@ public class PickupGatherer : MonoBehaviour {
                     }
                 } else
                 {
-                    last = objectHit;                    
+                    last = objectHit;
                     timeCounter = 0;
                 }
             
@@ -54,12 +43,7 @@ public class PickupGatherer : MonoBehaviour {
         } else
         {
             if (last != null)
-            { 
-                //last.GetComponent<MeshRenderer>().material.color = new Color(231, 189, 8);
-                
-                //Stop dissolving pickup
-                last.GetComponent<MeshRenderer>().material = materials[1];
-            }
+                last.GetComponent<MeshRenderer>().material.color = new Color(231, 189, 8);
             last = null;
         }
 	}

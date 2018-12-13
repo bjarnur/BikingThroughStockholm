@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 1, g: 0.8392157, b: 0, a: 1}
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 3
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: d06449995e136244bad002b625dfe0e4, type: 2}
   m_HaloStrength: 0.5
@@ -1025,11 +1025,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a285f07dbc551984a9601dd6d9588dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materials:
-  - {fileID: 2100000, guid: ca5ec77685bba4e09bef4aedb9971e42, type: 2}
-  - {fileID: 2100000, guid: 0250a443acfa34540a10a8c2daf18402, type: 2}
   distance: 8
-  delay: 2
+  delay: 0.2
 --- !u!114 &534669907
 MonoBehaviour:
   m_ObjectHideFlags: 0
