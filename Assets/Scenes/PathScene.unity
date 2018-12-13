@@ -1808,7 +1808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: {fileID: 1948960707}
-  speed: 0.5
+  speed: 0.1
   convergingSpeed: 0.1
 --- !u!4 &1649266706
 Transform:
