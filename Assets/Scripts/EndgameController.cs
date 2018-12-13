@@ -10,12 +10,13 @@ public class EndgameController : Singleton<EndgameController> {
     public VideoPlayer skyboxVideoPlayer;
     public CoinCounter coinCounter;
     public Text endingMessage;
+    public Text rankingMessage;
     protected EndgameController() { }
     public int numOfSecAfterEndPath = 5;
 
     PathFollower player;
 
-    private float speedAverage = 0.0f;
+    private float pointsOfThreshold = 0;
     private List<int> timeRanking = new List<int>();
 
     private void Awake() {
@@ -40,6 +41,7 @@ public class EndgameController : Singleton<EndgameController> {
 
     public void GameOver() {
         endingMessage.text = "End of you journey. You collected " + coinCounter.GetComponent<CoinCounter>().count.ToString() + " coins";
+        rankingMessage.text = "Ranking \n SONIA IS THE BEST";
         StartCoroutine(WaitFewSeconds());
         //Show the Ranking here
         //Add the average speed to the ranking here
@@ -48,11 +50,11 @@ public class EndgameController : Singleton<EndgameController> {
     private void resetNewPlayer() {
         //Maybe reset the videoplayer here
         endingMessage.text = "";
-        speedAverage = 0.0f;
+        pointsOfThreshold = 0.0f;
     }
 
-    public void TrackUserSpeed(float speed) {
-         
+    public void GiveUserPoints(int point) {
+        pointsOfThreshold += point;
     }
 
     IEnumerator WaitFewSeconds() {

@@ -58,5 +58,9 @@ public class RhythmTracker : MonoBehaviour
         //progress = Mathf.Min(progress + 0.1f, 1.0f);
         progress = Mathf.Min(speed, 1.0f);
         ProgressBar.fillAmount = progress;
+        if (progress > 0.75 & progress < 0.85) { // This should be somewheer common with the green/red color!!
+            EndgameController.Instance.GiveUserPoints(1);
+        }
+
     }
 }
