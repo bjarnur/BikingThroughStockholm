@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class RhythmTracker : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class RhythmTracker : MonoBehaviour
     private float progress;
     private float loseTime = 5.0f;
     private float timeLeft;
+
+    private bool simulationStarted = false;
 
 	// Use this for initialization
 	void Start ()
@@ -24,24 +27,29 @@ public class RhythmTracker : MonoBehaviour
         progress = Mathf.Max(progress - 0.1f * Time.deltaTime, 0f);
         if (Input.GetKeyDown("space"))
         {
+            if (!simulationStarted)
+                StartSimulation();
+
             progress = Mathf.Min(progress + 0.1f, 1.0f);
         }
 
-        ProgressBar.fillAmount = progress;
+        if (simulationStarted)
+        {
+            ProgressBar.fillAmount = progress;
+            if (progress < 0.7f) {
+                timeLeft -= Time.deltaTime;
+                ProgressBar.color = Color.red;
 
-        if (progress < 0.7f) {
-            timeLeft -= Time.deltaTime;
-            ProgressBar.color = Color.red;
+            } else {
+                timeLeft = loseTime;
+                ProgressBar.color = Color.green;
+            }
 
-        } else {
-            timeLeft = loseTime;
-            ProgressBar.color = Color.green;
+            if (timeLeft <= 0) {
+                GameOver();
+            }
         }
-
-        if (timeLeft <= 0) {
-            GameOver();
-        }
-	}
+    }
 
     private void GameOver() {
         EndgameController.Instance.GameOver();
@@ -49,7 +57,17 @@ public class RhythmTracker : MonoBehaviour
 
     public void UpdateRhythm()
     {
+        if (!simulationStarted)
+            StartSimulation();
+
         progress = Mathf.Min(progress + 0.1f, 1.0f);
         ProgressBar.fillAmount = progress;
+    }
+
+    private void StartSimulation()
+    {
+        GameObject.FindWithTag("BikeFootage").GetComponent<VideoPlayer>().Play();
+        GameObject.FindWithTag("PlayerContainer").GetComponent<PathFollower>().enabled = true;
+        simulationStarted = true;
     }
 }

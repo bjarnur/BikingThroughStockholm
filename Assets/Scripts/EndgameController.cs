@@ -46,7 +46,7 @@ public class EndgameController : Singleton<EndgameController> {
     public void GameOver() {
         skyboxVideoPlayer.Stop(); // We stop the video
 
-        endingMessage.text = "End of you journey. You collected " + cointCounter.GetComponent<CoinCounter>().count.ToString() + " coins";
+        endingMessage.text = "End of you journey. You collected " + coinCounter.GetComponent<CoinCounter>().count.ToString() + " coins";
 
         System.Threading.Thread.Sleep(5000);
         SceneManager.LoadScene("MainMenu");
