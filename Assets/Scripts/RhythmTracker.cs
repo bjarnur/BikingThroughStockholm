@@ -2,20 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class RhythmTracker : MonoBehaviour
 {
 
     public Image ProgressBar;
+    public List<GameObject> targetBars;
+    public int levelDuration = 40;
+
+    private int levelIdx;
+    private float levelGoal;
     private float progress;
     private float loseTime = 5.0f;
     private float timeLeft;
+    private float switchTimer;
+
+    private bool simulationStarted = false;
 
 	// Use this for initialization
 	void Start ()
     {
         timeLeft = loseTime;
         progress = 0.8f;
+
+        //Level 1, naturally
+        levelIdx = 2;
+        levelGoal = 0.2f;
+        switchTimer = 0.0f;
 	}
 	
 	// Update is called once per frame
@@ -24,24 +38,33 @@ public class RhythmTracker : MonoBehaviour
         //progress = Mathf.Max(progress - 0.1f * Time.deltaTime, 0f);
         if (Input.GetKeyDown("space"))
         {
+            if (!simulationStarted)
+                StartSimulation();
+
             progress = Mathf.Min(progress + 0.1f, 1.0f);
         }
 
-        ProgressBar.fillAmount = progress;
+        if (simulationStarted)
+        {
+            ProgressBar.fillAmount = progress;
+            if (progress < levelGoal) {
+                timeLeft -= Time.deltaTime;
+                ProgressBar.color = Color.red;
 
-        if (progress < 0.7f) {
-            timeLeft -= Time.deltaTime;
-            ProgressBar.color = Color.red;
+            } else {
+                timeLeft = loseTime;
+                ProgressBar.color = Color.green;
+            }
 
-        } else {
-            timeLeft = loseTime;
-            ProgressBar.color = Color.green;
+            if (timeLeft <= 0) {
+                //GameOver();
+            }
         }
 
-        if (timeLeft <= 0) {
-            GameOver();
-        }
-	}
+        switchTimer += Time.deltaTime;
+        if (switchTimer > levelDuration)
+            SwitchLevel();
+    }
 
     private void GameOver() {
         EndgameController.Instance.GameOver();
@@ -49,18 +72,53 @@ public class RhythmTracker : MonoBehaviour
 
     public void UpdateRhythm()
     {
+        if (!simulationStarted)
+            StartSimulation();
+
         progress = Mathf.Min(progress + 0.1f, 1.0f);
         ProgressBar.fillAmount = progress;
     }
 
     public void UpdateRhythm(float speed)
     {
+        if (!simulationStarted && speed > 0)
+        {
+            Debug.Log("Starting simulation. Speed: " + speed);
+            StartSimulation();
+        }            
+
         //progress = Mathf.Min(progress + 0.1f, 1.0f);
         progress = Mathf.Min(speed, 1.0f);
         ProgressBar.fillAmount = progress;
-        if (progress > 0.75 & progress < 0.85) { // This should be somewheer common with the green/red color!!
-            EndgameController.Instance.GiveUserPoints(1);
+
+    }
+
+    private void SwitchLevel()
+    {
+        targetBars[levelIdx].SetActive(false);
+        levelIdx = Random.Range(0, 3);
+        targetBars[levelIdx].SetActive(true);
+
+        switch(levelIdx)
+        {
+            case 0:
+                levelGoal = 0.2f;
+                break;
+            case 1:
+                levelGoal = 0.5f;
+                break;
+            case 2:
+                levelGoal = 0.7f;
+                break;
         }
 
+        switchTimer = 0.0f;
+    }
+
+    private void StartSimulation()
+    {        
+        GameObject.FindWithTag("BikeFootage").GetComponent<VideoPlayer>().Play();
+        GameObject.FindWithTag("PlayerContainer").GetComponent<PathFollower>().enabled = true;
+        simulationStarted = true;
     }
 }

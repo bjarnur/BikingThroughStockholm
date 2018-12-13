@@ -46,7 +46,7 @@ public class ConfettiSystem : MonoBehaviour {
                 float yCoord = Random.Range(minBounds.y, maxBounds.y);
                 float zCoord = Random.Range(minBounds.z, maxBounds.z);
 
-                Instantiate(confettiPrefab, new Vector3(xCoord, yCoord, zCoord), Quaternion.identity);
+                Instantiate(confettiPrefab, new Vector3(xCoord, yCoord, zCoord), Quaternion.identity, transform);
             }
         }
     }
