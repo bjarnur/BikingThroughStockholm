@@ -12,6 +12,7 @@ public class EndgameController : MonoBehaviour
     public CoinCounter coinCounter;
     public TextMeshProUGUI endingMessage;
     public int numOfSecAfterEndPath = 5;
+    public PickupGatherer gatherer;
 
     PathFollower player;
 
@@ -38,6 +39,8 @@ public class EndgameController : MonoBehaviour
 
     public void GameOver() {
         endingMessage.text = "End of your journey!\nYou collected " + coinCounter.GetComponent<CoinCounter>().count.ToString() + " coins";
+        player.enabled = false;
+        gatherer.enabled = false;
         StartCoroutine(WaitFewSeconds());
         //Show the Ranking here
         //Add the average speed to the ranking here

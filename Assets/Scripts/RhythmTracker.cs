@@ -18,7 +18,7 @@ public class RhythmTracker : MonoBehaviour
     private int levelIdx;
     private float levelGoal;
     private float progress;
-    private float loseTime = 5.0f;
+    private float loseTime = 15.0f;
     private float timeLeft;
     private float switchTimer;
 
@@ -61,10 +61,10 @@ public class RhythmTracker : MonoBehaviour
                 ProgressBar.color = Color.green;
             }
 
-            alpha = (loseTime - Mathf.Max(timeLeft, 0.0f)) / loseTime;
+            //alpha = (loseTime - Mathf.Max(timeLeft, 0.0f)) / loseTime;
 
             if (timeLeft <= 0) {
-                GameOver();
+                //GameOver();
             }
         }
 

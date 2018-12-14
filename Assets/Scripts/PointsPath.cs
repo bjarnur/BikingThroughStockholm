@@ -7,6 +7,7 @@ public class PointsPath : MonoBehaviour {
     public GameObject pickupPrefab;
     public float rowOffset = 1;
     public bool useRealPath = false;
+    public float coinsFrequency = 0.08f;
 
     List<Vector3> keyPoints;
     float totalDistance;
@@ -51,10 +52,10 @@ public class PointsPath : MonoBehaviour {
         {
             Destroy(child.gameObject);
         }
-        for (float i = 0.15f; i < 1; i += 0.05f)
+        for (float i = 0.15f; i < 1; i += coinsFrequency)
         {
             float r = Random.value;
-            AddPickupSerie(i, Random.Range(2, 5), 1.5f, r < 0.33f ? PathPosition.LEFT : (r < 0.66f ? PathPosition.CENTER : PathPosition.RIGHT));
+            AddPickupSerie(i, Random.Range(1, 3), 2, r < 0.33f ? PathPosition.LEFT : (r < 0.66f ? PathPosition.CENTER : PathPosition.RIGHT));
         }
     }
 
