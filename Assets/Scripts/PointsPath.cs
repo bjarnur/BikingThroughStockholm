@@ -41,14 +41,7 @@ public class PointsPath : MonoBehaviour {
 
         else
         { 
-            for (int i = 1; i < 10; i++)
-            {
-                AddPoint(10 * new Vector3(i, 0, Mathf.Cos(i)));
-            }
-            for (float i = 0.1f; i < 1; i += 0.1f)
-            {
-                AddPickupSerie(i, Random.Range(2, 5), 1.5f, Random.value < 0.5f ? PathPosition.LEFT : PathPosition.RIGHT);
-            }
+            AddPoint(300 * Vector3.right);
         }
     }
 
@@ -58,7 +51,7 @@ public class PointsPath : MonoBehaviour {
         {
             Destroy(child.gameObject);
         }
-        for (float i = 0.1f; i < 1; i += 0.1f)
+        for (float i = 0.15f; i < 1; i += 0.05f)
         {
             float r = Random.value;
             AddPickupSerie(i, Random.Range(2, 5), 1.5f, r < 0.33f ? PathPosition.LEFT : (r < 0.66f ? PathPosition.CENTER : PathPosition.RIGHT));

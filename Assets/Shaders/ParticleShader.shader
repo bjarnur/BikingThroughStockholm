@@ -43,7 +43,7 @@
 				vertToFrag output;				
 				output.vertex = UnityObjectToClipPos(v.vertex);
 
-				float3 worldPos = mul(unity_ObjectToWorld, output.vertex).xyz;
+				float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
 				output.worldPosition = worldPos;
 
 				return output;

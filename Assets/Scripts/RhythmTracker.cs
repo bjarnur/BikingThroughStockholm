@@ -11,6 +11,9 @@ public class RhythmTracker : MonoBehaviour
     public Image fadePanel;
     public List<GameObject> targetBars;
     public int levelDuration = 40;
+    public PathFollower player;
+    public CoinCounter coinCounter;
+    public EndgameController endgameController;
 
     private int levelIdx;
     private float levelGoal;
@@ -73,7 +76,7 @@ public class RhythmTracker : MonoBehaviour
     }
 
     private void GameOver() {
-        EndgameController.Instance.GameOver();
+        endgameController.GameOver();
     }
 
     public void UpdateRhythm()
@@ -124,7 +127,9 @@ public class RhythmTracker : MonoBehaviour
     private void StartSimulation()
     {        
         GameObject.FindWithTag("BikeFootage").GetComponent<VideoPlayer>().Play();
-        GameObject.FindWithTag("PlayerContainer").GetComponent<PathFollower>().enabled = true;
+        GetComponent<TimeController>().enabled = true;
+        player.Reset();
+        coinCounter.Reset();
         simulationStarted = true;
     }
 }

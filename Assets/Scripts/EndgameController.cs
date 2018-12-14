@@ -4,24 +4,21 @@ using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
-public class EndgameController : Singleton<EndgameController> {
-
+public class EndgameController : MonoBehaviour
+{
     public VideoPlayer skyboxVideoPlayer;
     public CoinCounter coinCounter;
-    public Text endingMessage;
-    public Text rankingMessage;
-    protected EndgameController() { }
+    public TextMeshProUGUI endingMessage;
     public int numOfSecAfterEndPath = 5;
 
     PathFollower player;
 
     private float pointsOfThreshold = 0;
     private List<int> timeRanking = new List<int>();
-
-    private void Awake() {
-        
-    }
+   
+    
 
     void Start () {
         player = GetComponent<PathFollower>();
@@ -40,8 +37,7 @@ public class EndgameController : Singleton<EndgameController> {
     }
 
     public void GameOver() {
-        endingMessage.text = "End of you journey. You collected " + coinCounter.GetComponent<CoinCounter>().count.ToString() + " coins";
-        rankingMessage.text = "Ranking \n SONIA IS THE BEST";
+        endingMessage.text = "End of your journey!\nYou collected " + coinCounter.GetComponent<CoinCounter>().count.ToString() + " coins";
         StartCoroutine(WaitFewSeconds());
         //Show the Ranking here
         //Add the average speed to the ranking here

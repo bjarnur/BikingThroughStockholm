@@ -9,9 +9,8 @@ public class MainMenu : MonoBehaviour {
     public float delay;
     public GameObject gameCamera;
 
+    GameObject last;
     float timeCounter;
-    
-
 
     void Update()
     {
@@ -22,16 +21,24 @@ public class MainMenu : MonoBehaviour {
             GameObject objectHit = hit.transform.gameObject;
             if (objectHit.CompareTag("Button")) //Same counter is for all buttons right now...
             {
-                objectHit.GetComponent<Button>().Select();
-                timeCounter += Time.deltaTime;
-                if(timeCounter >= delay)
+                if (objectHit == last)
                 {
-                    objectHit.GetComponent<Button>().onClick.Invoke();
+                    objectHit.GetComponent<Button>().Select();
+                    timeCounter += Time.deltaTime;
+                    if (timeCounter >= delay)
+                    {
+                        objectHit.GetComponent<Button>().onClick.Invoke();
+                    }
+                } else
+                {
+                    last = objectHit;
+                    timeCounter = 0;
                 }
 
             }
             else
             {
+                last = null;
                 timeCounter = 0;
             }
         }

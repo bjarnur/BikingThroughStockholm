@@ -15,6 +15,7 @@ public class PathFollower : MonoBehaviour {
 
     public void Reset()
     {
+        enabled = true;
         done = false;
         nextPoint = 0;
         lastDir = (path[1] - path[0]).normalized;

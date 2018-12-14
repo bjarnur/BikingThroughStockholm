@@ -59,11 +59,12 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FadeDuration: 300
-    - _FadeInValue: 250
+    - _FadeDuration: 5
+    - _FadeInValue: 20
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _IsPickingUp: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
