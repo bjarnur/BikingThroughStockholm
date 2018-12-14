@@ -43,11 +43,9 @@ public class MainMenu : MonoBehaviour {
             }
         }
     }
-    public void PlayGame()
+
+    public void PlayGame(string scene)
     {
-        SceneManager.LoadScene("PathScene");
+        SceneManager.LoadScene(scene);
     }
-
-
-
 }
