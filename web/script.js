@@ -46,7 +46,7 @@ new Vue({
       name: "SONIA CAMACHO",
       email: "soniach@kth.se",
       pic: "sonia.jpg",
-      contributions:[]
+      contributions:["Motion detection with Kinect","Footage recordings","GPS track adaptation","Website"]
     }, {
       name: "JULIEN ROUAULT",
       email: "rouault@kth.se",
@@ -74,11 +74,29 @@ new Vue({
       contributions:[]
     }],
     images: [{
-      name: "1",
-      description: " "
+      name: "BTS_1",
+      description: "Demo at VIC studio"
     }, {
-      name: "2",
-      description: " "
+      name: "BTS_2",
+      description: "Demo at VIC studio"
+    }, {
+      name: "BTS_3",
+      description: "Open House at VIC studio"
+    }, {
+      name: "BTS_4",
+      description: "Open House at VIC studio"
+    }, {
+      name: "BTS_5",
+      description: "Open House at VIC studio"
+    }, {
+      name: "BTS_6",
+      description: "Open House at VIC studio"
+    }, {
+      name: "BTS_7",
+      description: "Open House at VIC studio"
+    }, {
+      name: "BTS_8",
+      description: "Open House at VIC studio"
     }],
     motivation: motivation,
     challenges: challenges,

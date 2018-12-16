@@ -98,10 +98,10 @@
           </div>
 
           <div class="pictures">
-            <div v-for="i in [1, 2, 3, 4, 5, 6, 7, 8]">
-            <!-- <div v-for="image in images"> -->
-              <!-- <img :src="`pics/kotc${image.name}.jpg`" :alt="`${image.description}`" onclick="showImg(this)">:alt="`Picture ${i}`" -->
-              <img src="web/pics/photo_icon.png" onclick="showImg(this)">
+            <!-- <div v-for="i in [1, 2, 3, 4, 5, 6, 7, 8]"> -->
+            <div v-for="image in images">
+              <img :src="`web/pics/${image.name}.jpg`" :alt="`${image.description}`" onclick="showImg(this)"> <!--:alt="`Picture ${i}`" -->
+              <!-- <img src="web/pics/photo_icon.png" onclick="showImg(this)"> -->
             </div>
           </div>
         </div>
