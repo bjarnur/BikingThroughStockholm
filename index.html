@@ -23,9 +23,7 @@
           STOCKHOLM
         </div>
         <div class="outlined">
-          Virtual-Reality simulator
-          <!-- <br>
-          Created for the course AGI18 at KTH -->
+          An augmented virtuality experience aiming to gamify exercise
         </div>
       </div>
     </section>
@@ -36,9 +34,8 @@
           <!-- <div class="section-title">
               GOALS &amp MOTIVATION 
           </div> -->
-          <div  class="text-content">
-              
-          </div>
+          <div v-html="motivation" class="text-content"></div>
+
           <div class="centered">
             <img src="web/pics/video-player.png" width="400" height="300" />
             <!-- <iframe src="https://player.vimeo.com/video/299459802?autoplay=0&title=0&byline=0&portrait=0" width="100%" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>-->
@@ -48,9 +45,9 @@
       <section>
         <div class="container">
           <div class="section-title">
-              TECHNOLOGIES USED
+            TECHNOLOGIES USED
           </div>
-          <!-- <div v-html="technologies" class="text-content"></div> -->
+          <div v-html="technologies" class="text-content"></div>
           <div class="div-2">
             <div>
                 <img src="web/pics/unity-logo-white.png" />
@@ -69,7 +66,7 @@
             <div class="section-title">
                 CHALLENGES &amp OBSTACLES 
             </div>
-            <div v-html="challenges" class="text-content"></div>
+            <div v-html="challenges" class="text-content">
         </div>
       </section>
       <section>
@@ -77,7 +74,7 @@
           <div class="section-title">
               RELATED WORK
           </div>
-          <div v-html="relatedWork" class="text-content"></div>
+          <div v-html="relatedWork" class="text-content">
         </div>
         </section>
       <section>
@@ -101,10 +98,10 @@
           </div>
 
           <div class="pictures">
-            <div v-for="i in [1, 2, 3, 4, 5, 6, 7, 8]">
-            <!-- <div v-for="image in images"> -->
-              <!-- <img :src="`pics/kotc${image.name}.jpg`" :alt="`${image.description}`" onclick="showImg(this)">:alt="`Picture ${i}`" -->
-              <img src="web/pics/photo_icon.png" onclick="showImg(this)">
+            <!-- <div v-for="i in [1, 2, 3, 4, 5, 6, 7, 8]"> -->
+            <div v-for="image in images">
+              <img :src="`web/pics/${image.name}.jpg`" :alt="`${image.description}`" onclick="showImg(this)"> <!--:alt="`Picture ${i}`" -->
+              <!-- <img src="web/pics/photo_icon.png" onclick="showImg(this)"> -->
             </div>
           </div>
         </div>

@@ -5,20 +5,34 @@ using Kinect = Windows.Kinect;
 
 using Joint = Windows.Kinect.Joint;
 
-public class BodySourceView : MonoBehaviour 
+public class BodySourceView : MonoBehaviour
 {
     public GameObject canvas;
     public Material BoneMaterial;
     public GameObject BodySourceManager;
     public float footHigh;
     public float footLow;
+    public float detectionThreshold;
+    public bool doSetup = true;
+    //public bool isTracking = false;
+
+    private Vector3 footPosition = Vector3.zero;
+    private Vector3 prevFootPosition = Vector3.zero;
+    private LinkedList<float> footMotionData = new LinkedList<float>();
+    private int maxSizeList = 30; //Check this value
 
     private float cyclingSpeed = 0.0f;
     private bool isLeftFootUp = false;
     private float timeSpent = 0.0f;
-    private float previousTimeSpent = 0.0f;
-    private float speedFactor = 2.5f;
+
+    private float speedFactor = 10f;
     private RhythmTracker rhythmTracker;
+
+    private bool setupDone = false;
+    private float maxHeight = -100f;
+    private float minHeight = 100f;
+    private int count = 0;
+    private int downcount = 0;
 
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private List<Kinect.JointType> _joints = new List<Kinect.JointType>
@@ -34,26 +48,26 @@ public class BodySourceView : MonoBehaviour
         { Kinect.JointType.AnkleLeft, Kinect.JointType.KneeLeft },
         { Kinect.JointType.KneeLeft, Kinect.JointType.HipLeft },
         { Kinect.JointType.HipLeft, Kinect.JointType.SpineBase },
-        
+
         { Kinect.JointType.FootRight, Kinect.JointType.AnkleRight },
         { Kinect.JointType.AnkleRight, Kinect.JointType.KneeRight },
         { Kinect.JointType.KneeRight, Kinect.JointType.HipRight },
         { Kinect.JointType.HipRight, Kinect.JointType.SpineBase },
-        
+
         { Kinect.JointType.HandTipLeft, Kinect.JointType.HandLeft },
         { Kinect.JointType.ThumbLeft, Kinect.JointType.HandLeft },
         { Kinect.JointType.HandLeft, Kinect.JointType.WristLeft },
         { Kinect.JointType.WristLeft, Kinect.JointType.ElbowLeft },
         { Kinect.JointType.ElbowLeft, Kinect.JointType.ShoulderLeft },
         { Kinect.JointType.ShoulderLeft, Kinect.JointType.SpineShoulder },
-        
+
         { Kinect.JointType.HandTipRight, Kinect.JointType.HandRight },
         { Kinect.JointType.ThumbRight, Kinect.JointType.HandRight },
         { Kinect.JointType.HandRight, Kinect.JointType.WristRight },
         { Kinect.JointType.WristRight, Kinect.JointType.ElbowRight },
         { Kinect.JointType.ElbowRight, Kinect.JointType.ShoulderRight },
         { Kinect.JointType.ShoulderRight, Kinect.JointType.SpineShoulder },
-        
+
         { Kinect.JointType.SpineBase, Kinect.JointType.SpineMid },
         { Kinect.JointType.SpineMid, Kinect.JointType.SpineShoulder },
         { Kinect.JointType.SpineShoulder, Kinect.JointType.Neck },
@@ -63,77 +77,80 @@ public class BodySourceView : MonoBehaviour
     void Start()
     {
         rhythmTracker = canvas.GetComponent<RhythmTracker>();
+        footMotionData.AddFirst(0f);
+        StartCoroutine(CheckSpeed());
     }
 
-    void Update () 
+    void Update()
     {
         if (BodySourceManager == null)
         {
             return;
         }
-        
+
         _BodyManager = BodySourceManager.GetComponent<BodySourceManager>();
         if (_BodyManager == null)
         {
             return;
         }
-        
+
         Kinect.Body[] data = _BodyManager.GetData();
         if (data == null)
         {
             return;
         }
-        
+
         List<ulong> trackedIds = new List<ulong>();
-        foreach(var body in data)
+        foreach (var body in data)
         {
             if (body == null)
             {
                 continue;
-              }
-                
-            if(body.IsTracked)
+            }
+
+            if (body.IsTracked)
             {
-                trackedIds.Add (body.TrackingId);
+                trackedIds.Add(body.TrackingId);
             }
         }
-        
+
         List<ulong> knownIds = new List<ulong>(_Bodies.Keys);
-        
+
         // First delete untracked bodies
-        foreach(ulong trackingId in knownIds)
+        foreach (ulong trackingId in knownIds)
         {
-            if(!trackedIds.Contains(trackingId))
+            if (!trackedIds.Contains(trackingId))
             {
                 Destroy(_Bodies[trackingId]);
                 _Bodies.Remove(trackingId);
             }
         }
 
-        foreach(var body in data)
+        foreach (var body in data)
         {
             if (body == null)
             {
                 continue;
             }
-            
-            if(body.IsTracked)
+
+            if (body.IsTracked)
             {
-                if(!_Bodies.ContainsKey(body.TrackingId))
+                if (!_Bodies.ContainsKey(body.TrackingId))
                 {
                     _Bodies[body.TrackingId] = CreateBodyObject(body.TrackingId);
                 }
-                timeSpent += Time.deltaTime;  // Maybe it's not the best place to set this, 2 bodies can cause to double count. Maybe for now it just works
+                //timeSpent += Time.deltaTime;  // Maybe it's not the best place to set this, 2 bodies can cause to double count. Maybe for now it just works
                 RefreshBodyObject(body, _Bodies[body.TrackingId]);
             }
         }
+        timeSpent += Time.deltaTime;
     }
-    
+
     private GameObject CreateBodyObject(ulong id)
     {
         GameObject body = new GameObject("Body:" + id);
-        body.SetActive(false);
-        
+        //body.SetActive(false);
+
         // Create joints
         //foreach (Kinect.JointType joint in _joints)
         //{
@@ -168,33 +185,39 @@ public class BodySourceView : MonoBehaviour
 
         return body;
     }
-    
+
     private void RefreshBodyObject(Kinect.Body body, GameObject bodyObject)
     {
         for (Kinect.JointType jt = Kinect.JointType.SpineBase; jt <= Kinect.JointType.ThumbRight; jt++)
         {
             Kinect.Joint sourceJoint = body.Joints[jt];
             Kinect.Joint? targetJoint = null;
-            
-            if(_BoneMap.ContainsKey(jt))
+
+            if (_BoneMap.ContainsKey(jt))
             {
                 targetJoint = body.Joints[_BoneMap[jt]];
             }
-            
+
             Transform jointObj = bodyObject.transform.Find(jt.ToString());
             jointObj.localPosition = GetVector3FromJoint(sourceJoint);
-            if(jt == Kinect.JointType.FootLeft)
+            //Debug.Log("body outside " + body.TrackingId);
+            if (jt == Kinect.JointType.FootLeft && jointObj.localPosition.x >= detectionThreshold)
             {
+                //Debug.Log("body inside " + body.TrackingId);
+                if (!setupDone && doSetup)
+                {
+                    SetupPedal(jointObj.localPosition);
+                }
                 manageCyclingTimes(jointObj.localPosition);
                 //-4.2 (Down) -2.1 (Up) -> set the threshold at 3
             }
-            
+
             LineRenderer lr = jointObj.GetComponent<LineRenderer>();
-            if(targetJoint.HasValue)
+            if (targetJoint.HasValue)
             {
                 lr.SetPosition(0, jointObj.localPosition);
                 lr.SetPosition(1, GetVector3FromJoint(targetJoint.Value));
-                lr.SetColors(GetColorForState (sourceJoint.TrackingState), GetColorForState(targetJoint.Value.TrackingState));
+                lr.SetColors(GetColorForState(sourceJoint.TrackingState), GetColorForState(targetJoint.Value.TrackingState));
             }
             else
             {
@@ -203,52 +226,119 @@ public class BodySourceView : MonoBehaviour
         }
     }
     /****** Function to calculate the speed ********/
-    private void manageCyclingTimes(Vector3 cyclingLocalPosition) {
-        //Debug.Log("foot height " + cyclingLocalPosition.y);
-        if (cyclingLocalPosition.y < footLow && isLeftFootUp) {
+    private void manageCyclingTimes(Vector3 cyclingLocalPosition)
+    {
+        //Debug.Log("foot height " + cyclingLocalPosition.y + "foot X " + cyclingLocalPosition.x + "foot Z " + cyclingLocalPosition.z);
+        if (cyclingLocalPosition.y < footLow && isLeftFootUp)
+        {
             isLeftFootUp = false;
-            calculateCyclingSpeed(); // We call here the speed func. This will use the previousTimeSpent and the current value of timeSpent
-            previousTimeSpent = timeSpent; // THen we change the previousTimeSpent value for the next iteration
-            timeSpent = 0.0f;
-            Debug.Log("DOWN");
-            rhythmTracker.UpdateRhythm();
+            //Debug.Log("DOWN");
         }
-        else if (cyclingLocalPosition.y > footHigh && !isLeftFootUp) {
+        else if (cyclingLocalPosition.y > footHigh && !isLeftFootUp)
+        {
             isLeftFootUp = true;
-            calculateCyclingSpeed();
-            previousTimeSpent = timeSpent;
-            timeSpent = 0.0f;
-            Debug.Log("UP");
+            //calculateCyclingSpeed();
+            //Debug.Log("UP");
         }
 
-    }
-    private void calculateCyclingSpeed() {
-        cyclingSpeed = Mathf.Abs(timeSpent - previousTimeSpent) * speedFactor; // We get the difference in absolute val and we multiply it for some factor. This will have to be tuned.
-        //print(cyclingSpeed);
+
+
+        footPosition = cyclingLocalPosition;
+
     }
 
-    public float getCyclingSpeed() {
+    public float getCyclingSpeed()
+    {
         return cyclingSpeed;
     }
 
-    
+    public void SetupPedal(Vector3 footPos)
+    {
+        maxHeight = footPos.y > maxHeight ? footPos.y : maxHeight;
+        minHeight = footPos.y < minHeight ? footPos.y : minHeight;
+        count++;
+        if (count == 500)
+        {
+            print("Max: " + maxHeight);
+            print("Min: " + minHeight);
+            print("X: " + footPos.x);
+            print("Z: " + footPos.z);
+
+            footHigh = maxHeight - 1f;
+            footLow = minHeight + 1f;
+
+            setupDone = true;
+        }
+    }
+
+    // Get the average of all values in the list
+    public float GetAverage(LinkedList<float> motionDataList)
+    {
+
+        if (motionDataList.Count == 0)
+        {
+            return 0f;
+        }
+
+        float average = 0f;
+
+        foreach (float motionData in motionDataList)
+        {
+            average += motionData;
+        }
+
+        average = average / motionDataList.Count;
+
+        return average;
+    }
+
+    private float ComputeSpeed()
+    {
+        Vector3 distVector = footPosition - prevFootPosition;
+
+        float dist = distVector.magnitude; //Check this value
+        //Store value removing outliers
+        //Debug.Log(dist);
+        if (dist < 10f) //Check this value
+        {
+            footMotionData.AddFirst(dist);
+            if (footMotionData.Count > maxSizeList)
+            {
+                footMotionData.RemoveLast();
+            }
+        }
+        prevFootPosition = footPosition;
+
+        float speed = GetAverage(footMotionData);
+        rhythmTracker.UpdateRhythm(speed);
+        //Debug.Log("Speed: " + speed);
+        return speed;
+    }
+
+    IEnumerator CheckSpeed()
+    {
+        cyclingSpeed = ComputeSpeed();
+        yield return new WaitForSeconds(0.05f);
+        StartCoroutine(CheckSpeed());
+    }
+
     /**********************************************/
 
     private static Color GetColorForState(Kinect.TrackingState state)
     {
         switch (state)
         {
-        case Kinect.TrackingState.Tracked:
-            return Color.green;
+            case Kinect.TrackingState.Tracked:
+                return Color.green;
 
-        case Kinect.TrackingState.Inferred:
-            return Color.red;
+            case Kinect.TrackingState.Inferred:
+                return Color.red;
 
-        default:
-            return Color.black;
+            default:
+                return Color.black;
         }
     }
-    
+
     private static Vector3 GetVector3FromJoint(Kinect.Joint joint)
     {
         return new Vector3(joint.Position.X * 10, joint.Position.Y * 10, joint.Position.Z * 10);

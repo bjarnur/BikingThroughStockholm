@@ -10,7 +10,7 @@ html, body {
   height: 100%;
   font-family: "Source Sans Pro", sans-serif;
   font-size: 16pt;
-  color: rgba(255, 255, 255, 0.85);
+  color: #F4FFF8;
   font-weight: 200;
 }
 
@@ -64,7 +64,7 @@ html, body {
 }
 
 #app section .section-title {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: #8BAAAD;
   text-align: center;
   color: #202024;
   font-weight: 300;
@@ -77,7 +77,7 @@ html, body {
 }
 
 #background {
-  background: url("pics/background.png");
+  background-color: #4D4847;
   background-size: auto 100%;
   margin-bottom: -20px;
 }
@@ -100,7 +100,7 @@ html, body {
   background-size: cover;
   font-family: monofonto, Calibri, sans-serif;
   font-size: 24pt;
-  color: white;
+  color: #F4FFF8;
 }
 
 #slideshow .container {
@@ -117,7 +117,7 @@ html, body {
 }
 
 #slideshow .container .gametitle {
-  margin-right: 20px;
+  margin-right: 70px;
   font-size: 96pt;
   font-weight: bold;
   line-height: 86pt;
@@ -125,10 +125,9 @@ html, body {
 }
 
 #slideshow .container .gametitle div {
-  text-align: right;
   font-size: 52pt;
   line-height: 46pt;
-  padding-right: 4px;
+  margin: auto;
 }
 
 #slideshow .container .outlined {
@@ -155,7 +154,9 @@ html, body {
   padding-top: 50px;
   padding-left: 10% !important;
   padding-right: 10% !important;
-  background: #746139;
+  color: black;
+  background: #1C3738;
+  color: #F4FFF8;
 }
 
 #gallery .pictures {

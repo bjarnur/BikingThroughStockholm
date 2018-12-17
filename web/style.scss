@@ -12,7 +12,8 @@ html, body {
   // font-family: monofonto, Calibri, sans-serif;
   font-family: "Source Sans Pro", sans-serif;
   font-size: 16pt;
-  color: rgba(255, 255, 255, 0.85);
+  //color: rgba(255, 255, 255, 0.85);
+  color: #F4FFF8;
   font-weight: 200;
 }
 
@@ -58,7 +59,8 @@ html, body {
     }
 
     .section-title {
-      background-color: rgba(255, 255, 255, 0.70);
+      //background-color: rgba(255, 255, 255, 0.70);
+      background-color: #8BAAAD;
       text-align: center;
       color: rgb(32, 32, 36);
       font-weight: 300;
@@ -74,7 +76,8 @@ html, body {
 }
 
 #background {
-  background: url('pics/background.png');
+  //background: url('pics/background.png');
+  background-color: #4D4847;
   background-size: auto 100%;
   margin-bottom: -20px;
 }
@@ -91,7 +94,9 @@ html, body {
 
   font-family: monofonto, Calibri, sans-serif;
   font-size: 24pt;
-  color: white;
+  //color: white;
+  color: #F4FFF8;
+
 
   .container {
     display: flex;
@@ -100,17 +105,19 @@ html, body {
     background: none;
 
     .gametitle {
-      margin-right: 20px;
+      //margin-right: 20px;
+      margin-right: 70px;
       font-size: 96pt;
       font-weight: bold;
       line-height: 86pt;
       color: #ffbd00;
   
       div {
-        text-align: right;
+        //text-align: right;
         font-size: 52pt;
         line-height: 46pt;
-        padding-right: 4px;
+        //padding-right: 4px;
+        margin: auto;
       }
     }
 
@@ -140,7 +147,13 @@ html, body {
     padding-top: 50px;
     padding-left: 10% !important;
     padding-right: 10% !important;
-    background: rgb(116, 97, 57);
+    //background: rgb(116, 97, 57);
+    //background: #746139;
+    color: black;
+    //background-color: rgba(255, 255, 255, 0.7);
+    background: #1C3738;
+    color: #F4FFF8;
+  
   }
 }
 
