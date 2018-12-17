@@ -34,7 +34,8 @@ public class TimeController : MonoBehaviour {
         "Go you!!", 
         "Well done!!",
         "WOW!",
-        "Biking saves money and burns calories",
+        "Biking saves money",
+        "Biking burns calories",
         "Keep up the good work!!",
         "Good job :)",
         "Nicely done!"

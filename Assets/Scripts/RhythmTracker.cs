@@ -61,10 +61,10 @@ public class RhythmTracker : MonoBehaviour
                 ProgressBar.color = Color.green;
             }
 
-            //alpha = (loseTime - Mathf.Max(timeLeft, 0.0f)) / loseTime;
+            alpha = (loseTime - Mathf.Max(timeLeft, 0.0f)) / loseTime;
 
             if (timeLeft <= 0) {
-                //GameOver();
+                GameOver();
             }
         }
 
