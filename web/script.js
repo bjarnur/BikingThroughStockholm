@@ -102,7 +102,26 @@ new Vue({
     challenges: challenges,
     lessons: lessons,
     relatedWork: relatedWork,
-    technologies: technologies
+    technologies: technologies,
+    tabs:[{
+      id: "technologies",
+      label: "Technologies"
+    }, {
+      id: "challenges",
+      label: "Challenges"
+    }, {
+      id: "related-work",
+      label: "Related Work"
+    }, {
+      id: "lessons",
+      label: "Learning"
+    }, {
+      id: "gallery",
+      label: "Gallery"
+    }, {
+      id: "team",
+      label: "Team"
+    }]
   }
 })
 
@@ -135,6 +154,11 @@ window.onclick = function(event) {
   }
 }
 
+function scrollToElement(elementID) {
+  $('body,html').animate({
+    scrollTop: $(elementID).offset().top
+}, 800);
+}
 ////////////////////////////////////////////////////////////////
 // FOOTER
 // Add a back to top animation to the button in the footer
