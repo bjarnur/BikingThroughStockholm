@@ -45,31 +45,37 @@ new Vue({
     users: [{
       name: "SONIA CAMACHO",
       email: "soniach@kth.se",
+      linkedin: "https://www.linkedin.com/in/sonia-ch/",
       pic: "sonia.jpg",
       contributions:["Motion detection with Kinect","Footage recordings","GPS track adaptation","Website"]
     }, {
       name: "JULIEN ROUAULT",
       email: "rouault@kth.se",
+      linkedin: "https://www.linkedin.com/in/julien-rouault/",
       pic: "julien.jpg",
       contributions:[]
     }, {
       name: "POORIA GHAVAMIAN",
       email: "pooriag@kth.se",
+      linkedin: "https://www.linkedin.com/in/pooria-ghavamian/",
       pic: "pooria.jpg",
       contributions:[]
     }, {
       name: "BJARNI GUDMUNDSSON",
       email: "brgud@kth.se",
+      linkedin: "https://www.linkedin.com/in/bjarni-ragnar-gudmundsson-17a12b100/",
       pic: "bjarni.jpg",
       contributions:[]
     }, {
       name: "RAFA LUCENA",
       email: "rafaella@kth.se",
+      linkedin: "https://www.linkedin.com/in/rlaraujo/",
       pic: "rafa.jpg",
       contributions:[]
     }, {
       name: "HENRIQUE FURTADO",
       email: "hfm@kth.se",
+      linkedin: "https://www.linkedin.com/in/henriquefur/",
       pic: "henrique.jpg",
       contributions:[]
     }],

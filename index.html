@@ -138,10 +138,10 @@
                 {{ user.name }}
                 <br>
                 <a class="email" :href="`mailto:${user.email}`">{{ user.email }}</a>
-                
-                  <p v-for="contribution in user.contributions" class="list">
-                    {{contribution}}
-                  </p>
+                <a :href="`${user.linkedin}`" style="padding-left: 5pt"><i class="fab fa-linkedin-square w3-hover-opacity"></i></a>
+                <p v-for="contribution in user.contributions" class="list">
+                  {{contribution}}
+                </p>
               </div>
             </div>
           </div>
