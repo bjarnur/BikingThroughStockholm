@@ -101,7 +101,7 @@ new Vue({
       name: "BTS_7",
       description: "Open House at VIC studio"
     }, {
-      name: "BTS_8",
+      name: "BTS_9",
       description: "Open House at VIC studio"
     }],
     motivation: motivation,
