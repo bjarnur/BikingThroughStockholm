@@ -5,6 +5,19 @@
 
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:200|Source+Sans+Pro:200,300');
 
+// $background-color: #4D4847;
+// $section-background-color: rgb(44,44,50);
+// $title-background-color: #ffbd00; //#8BAAAD;
+// $title-text-color: #1C3738;
+// $text-color: #F4FFF8;
+
+$background-color: rgb(245, 225, 181); //#EAC67A; #984B43;
+$section-background-color: rgb(34, 54, 63);//#233237;
+$title-background-color: #984B43; //#8BAAAD;
+$title-text-color: #F4FFF8;
+$text-color: #F4FFF8;
+$tab-color: #984B43;
+
 html, body {
   margin: 0;
   padding: 0;
@@ -13,7 +26,8 @@ html, body {
   font-family: "Source Sans Pro", sans-serif;
   font-size: 16pt;
   //color: rgba(255, 255, 255, 0.85);
-  color: #F4FFF8;
+  //color: #F4FFF8;
+  color: $text-color;
   font-weight: 200;
 }
 
@@ -49,6 +63,7 @@ html, body {
 
         div {
           margin: 2px;
+          padding: 20pt;
           width: calc(33% - 4px);
           img{
             width: 100%;
@@ -60,9 +75,11 @@ html, body {
 
     .section-title {
       //background-color: rgba(255, 255, 255, 0.70);
-      background-color: #8BAAAD;
+      //background-color: #8BAAAD;
+      background-color: $title-background-color;
       text-align: center;
-      color: rgb(32, 32, 36);
+      //color: rgb(32, 32, 36);
+      color: $title-text-color;
       font-weight: 300;
       padding: 10px 0 10px 0;
       margin-bottom: 40px;
@@ -71,13 +88,13 @@ html, body {
 
   :not(#slideshow) .container { 
     //background-color: rgba(200, 200, 200, 1); 
-    background-color: rgb(44,44,50); 
+    background-color: $section-background-color; 
   }
 }
 
 #background {
   //background: url('pics/background.png');
-  background-color: #4D4847;
+  background-color: $background-color;
   background-size: auto 100%;
   margin-bottom: -20px;
 }
@@ -95,7 +112,7 @@ html, body {
   font-family: monofonto, Calibri, sans-serif;
   font-size: 24pt;
   //color: white;
-  color: #F4FFF8;
+  //color: #F4FFF8;
 
 
   .container {
@@ -105,12 +122,12 @@ html, body {
     background: none;
 
     .gametitle {
-      //margin-right: 20px;
+      margin-left: 20px;
       margin-right: 70px;
       font-size: 96pt;
       font-weight: bold;
       line-height: 86pt;
-      color: #ffbd00;
+      color: #fccf54;
   
       div {
         //text-align: right;
@@ -123,6 +140,7 @@ html, body {
 
     .outlined {
       text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+      margin: 20px;
     }
   }
 }
@@ -149,32 +167,44 @@ html, body {
     padding-right: 10% !important;
     //background: rgb(116, 97, 57);
     //background: #746139;
-    color: black;
     //background-color: rgba(255, 255, 255, 0.7);
-    background: #1C3738;
-    color: #F4FFF8;
+    background: $section-background-color; //#1C3738;
+    //color: #F4FFF8;
   
   }
 }
 
+.sponsored {
+  background-color: $background-color;
+  padding: 20pt;
+  text-align: right;
+  color: #1C3738;
+  img {
+    padding-left: 10pt;
+    padding-right: 20pt;
+  } 
+}
+
 #tabs {
   //padding: 20pt;
-  background-color: #ffbd00;
+  background-color: $tab-color;
   
 }
 .tabs {
   display: inline-block;
-  padding: 16pt;
+  padding: 14pt;
+  color: $title-text-color;
+
   a {
     //font-family: monofonto, Calibri, sans-serif;
     font-weight: 300;
     text-decoration: none;
-    font-size: 14pt;
+    font-size: 15pt;
   }
 }
 .tabs-left {
   display: inline-block;
-  width: 85%;
+  width: 90%;
   text-align: center;
   div:hover {
     background-color: #f1f1f185;
@@ -186,7 +216,7 @@ html, body {
 }
 
 .dropbtn {
-  background-color: #ffbd00;
+  background-color: $tab-color;
   color: white;
   padding: 16px;
   font-size: 14px;
@@ -197,7 +227,7 @@ html, body {
 .dropdown {
   display: none;
   position: relative;
-  background-color: #ffbd00;
+  background-color: $tab-color;
   width: 100%;
 }
 
@@ -353,6 +383,13 @@ html, body {
       }
     }
   }
+  .div-2 {
+
+    div {
+      margin: 2px;
+      padding: 5pt !important;
+    }
+  }
   
 }
 
@@ -361,20 +398,23 @@ html, body {
   #team .team .user { width: 100%; }
   #slideshow .container {
     display: block;
-    text-align: center;
+    //text-align: center;
+    
     
     .gametitle {
+      margin-left: 20pt;
       margin-bottom: 20px;
       div {
         margin-right: 62px;
       }
+      
+    }
+    .outlined {
+      margin: 20pt !important;
     }
   }
   .text-content {
     font-size: 12pt; 
-  }
-  #tabs {
-    display: none;
   }
 }
 
@@ -449,7 +489,7 @@ html, body {
 
 footer {
   margin-top: 20px;
-  background: rgb(27, 27, 31);
+  background: $tab-color; //rgb(27, 27, 31);
   //display: block;
   .icon{
     font-size: 40px;

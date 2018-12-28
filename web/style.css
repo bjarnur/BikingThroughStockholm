@@ -55,6 +55,7 @@ html, body {
 
 #app section .container .div-2 div {
   margin: 2px;
+  padding: 20pt;
   width: calc(33% - 4px);
 }
 
@@ -64,20 +65,20 @@ html, body {
 }
 
 #app section .section-title {
-  background-color: #8BAAAD;
+  background-color: #984B43;
   text-align: center;
-  color: #202024;
+  color: #F4FFF8;
   font-weight: 300;
   padding: 10px 0 10px 0;
   margin-bottom: 40px;
 }
 
 #app :not(#slideshow) .container {
-  background-color: #2c2c32;
+  background-color: #22363f;
 }
 
 #background {
-  background-color: #4D4847;
+  background-color: #f5e1b5;
   background-size: auto 100%;
   margin-bottom: -20px;
 }
@@ -100,7 +101,6 @@ html, body {
   background-size: cover;
   font-family: monofonto, Calibri, sans-serif;
   font-size: 24pt;
-  color: #F4FFF8;
 }
 
 #slideshow .container {
@@ -117,11 +117,12 @@ html, body {
 }
 
 #slideshow .container .gametitle {
+  margin-left: 20px;
   margin-right: 70px;
   font-size: 96pt;
   font-weight: bold;
   line-height: 86pt;
-  color: #ffbd00;
+  color: #fccf54;
 }
 
 #slideshow .container .gametitle div {
@@ -132,6 +133,7 @@ html, body {
 
 #slideshow .container .outlined {
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+  margin: 20px;
 }
 
 #main-content .centered {
@@ -154,29 +156,40 @@ html, body {
   padding-top: 50px;
   padding-left: 10% !important;
   padding-right: 10% !important;
-  color: black;
-  background: #1C3738;
-  color: #F4FFF8;
+  background: #22363f;
+}
+
+.sponsored {
+  background-color: #f5e1b5;
+  padding: 20pt;
+  text-align: right;
+  color: #1C3738;
+}
+
+.sponsored img {
+  padding-left: 10pt;
+  padding-right: 20pt;
 }
 
 #tabs {
-  background-color: #ffbd00;
+  background-color: #984B43;
 }
 
 .tabs {
   display: inline-block;
-  padding: 16pt;
+  padding: 14pt;
+  color: #F4FFF8;
 }
 
 .tabs a {
   font-weight: 300;
   text-decoration: none;
-  font-size: 14pt;
+  font-size: 15pt;
 }
 
 .tabs-left {
   display: inline-block;
-  width: 85%;
+  width: 90%;
   text-align: center;
 }
 
@@ -190,7 +203,7 @@ html, body {
 }
 
 .dropbtn {
-  background-color: #ffbd00;
+  background-color: #984B43;
   color: white;
   padding: 16px;
   font-size: 14px;
@@ -201,7 +214,7 @@ html, body {
 .dropdown {
   display: none;
   position: relative;
-  background-color: #ffbd00;
+  background-color: #984B43;
   width: 100%;
 }
 
@@ -359,6 +372,10 @@ html, body {
     line-height: 32pt;
     padding-right: 4px;
   }
+  .div-2 div {
+    margin: 2px;
+    padding: 5pt !important;
+  }
 }
 
 @media only screen and (max-width: 500px) {
@@ -370,19 +387,19 @@ html, body {
   }
   #slideshow .container {
     display: block;
-    text-align: center;
   }
   #slideshow .container .gametitle {
+    margin-left: 20pt;
     margin-bottom: 20px;
   }
   #slideshow .container .gametitle div {
     margin-right: 62px;
   }
+  #slideshow .container .outlined {
+    margin: 20pt !important;
+  }
   .text-content {
     font-size: 12pt;
-  }
-  #tabs {
-    display: none;
   }
 }
 
@@ -460,7 +477,7 @@ html, body {
 
 footer {
   margin-top: 20px;
-  background: #1b1b1f;
+  background: #984B43;
 }
 
 footer .icon {

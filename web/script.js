@@ -9,14 +9,14 @@ While you bike we keep track of your performance throughout the session. A part 
 </p>`
 
 const challenges = `<p>
-At the very start of the project we were tasked with finding creative ways of using the <i>Backbone</i> camera. Many of the challenges we have faced during the course of the project work are in some ways related to the camera. This includes everything from finding meaningful ways to incorporate the camera in our project to technical issues. For example we had to figure out how to convert the video format from fisheye to spherical. We experimented with some tools for this, but ultimately realised that Unity can take care of this for us, if we import the video correctly into our Unity project. 
+At the very start of the project we were tasked with finding creative ways of using the fisheye camera. Many of the challenges we have faced during the course of the project work are in some ways related to the camera. This includes everything from finding meaningful ways to incorporate the camera in our project to technical issues. For example we had to figure out how to convert the video format from fisheye to spherical. We experimented with some tools for this, but ultimately realised that Unity can take care of this for us, if we import the video correctly into our Unity project. 
 </p>
 <p>
 Other technical challenges include working with our motion sensor, <i>Kinect</i>, and our VR hardware <i>Oculus Rift</i>. None of us had ever worked with this specific hardware before, so it was a learning experience. However, after the initial learning curve our experience of working with both the <i>Kinect</i> and the <i>Oculus</i> is quite positive. 
 </p> `
 
 const lessons = `<p>
-Many of the lessons learned relate in some way to the hardware we worked with, the <i>Oculus Rift</i>, <i>Kinect</i> and the <i>Backbone</i> camera. For instance, we need to be able to keep track of how our player moves their feet, while ignoring irrelevant noise going on in the background. This included both technical solutions, and being smart about where in a room to deploy the bike. 
+Many of the lessons learned relate in some way to the hardware we worked with, the <i>Oculus Rift</i>, <i>Kinect</i> and the <i>fisheye</i> camera. For instance, we need to be able to keep track of how our player moves their feet, while ignoring irrelevant noise going on in the background. This included both technical solutions, and being smart about where in a room to deploy the bike. 
 </p>
 <p>
 Other challenges relate to other parts of the project. To implement interesting graphical effects we implemented our own shaders and particle systems. We also had to design the gamification elements of our application, for which we read up on gamification on a higher level. 
@@ -33,11 +33,11 @@ A big part of the inspiration behind <i>Biking Through Stockholm</i> project cam
 </p> `
 
 const technologies = `<p>
-              The project is an augmented virtuality experience that uses pre-recorded video, to simulate a bike ride through Stockholm. The pre-recorded footage is on fisheye format, recorded with the <i>Backbone</i> camera, which can be viewed in VR with an <i>Oculus Rift</i>. Finally the project uses <i>Kinect</i> to detect players’ movement, which serves as the main interaction medium. 
-              </p>
-              <p>
-              Since our project deals with physical activity, motivating the user is paramount. Therefore, we deployed “gameful design”, which strives to create an enjoyable interactive system. This has been done through purposeful gamification. To tie all of this together we used the <i>Unity</i> game engine. We had all worked with the engine before, and it made it easy for us to integrate all the different part of the project. 
-              </p> `
+The project is an augmented virtuality experience that uses pre-recorded video to simulate a bike ride through Stockholm. The footage is recorded with a 280-degree fisheye camera, which can be viewed in VR with an <i>Oculus Rift</i>. Finally the project uses <i>Kinect</i> to detect players’ movement, which serves as the main interaction medium. 
+</p>
+<p>
+Since our project deals with physical activity, motivating the user is paramount. Therefore, we deployed “gameful design”, which strives to create an enjoyable interactive system. This has been done through purposeful gamification. To tie all of this together we used the <i>Unity</i> game engine. We had all worked with the engine before, and it made it easy for us to integrate all the different part of the project. 
+</p> `
 
 new Vue({
   el: '#app',
@@ -71,13 +71,13 @@ new Vue({
       email: "rafaella@kth.se",
       linkedin: "https://www.linkedin.com/in/rlaraujo/",
       pic: "rafa.jpg",
-      contributions:[]
+      contributions:["Motion detection with Kinect", "Gameplay"]
     }, {
       name: "HENRIQUE FURTADO",
       email: "hfm@kth.se",
       linkedin: "https://www.linkedin.com/in/henriquefur/",
       pic: "henrique.jpg",
-      contributions:[]
+      contributions:["Gamification of the experience"]
     }],
     images: [{
       name: "BTS_1",
@@ -110,6 +110,9 @@ new Vue({
     relatedWork: relatedWork,
     technologies: technologies,
     tabs:[{
+      id: "demo",
+      label: "Demo"
+    }, {
       id: "technologies",
       label: "Technologies"
     }, {
