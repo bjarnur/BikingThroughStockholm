@@ -53,19 +53,19 @@ new Vue({
       email: "rouault@kth.se",
       linkedin: "https://www.linkedin.com/in/julien-rouault/",
       pic: "julien.jpg",
-      contributions:[]
+      contributions:["Gamification", "Sound"]
     }, {
       name: "POORIA GHAVAMIAN",
       email: "pooriag@kth.se",
       linkedin: "https://www.linkedin.com/in/pooria-ghavamian/",
       pic: "pooria.jpg",
-      contributions:[]
+      contributions:["Footage stabilization", "Advanced graphics"]
     }, {
       name: "BJARNI GUDMUNDSSON",
       email: "brgud@kth.se",
       linkedin: "https://www.linkedin.com/in/bjarni-ragnar-gudmundsson-17a12b100/",
       pic: "bjarni.jpg",
-      contributions:[]
+      contributions:["Graphics", "Gamification", "Project management"]
     }, {
       name: "RAFA LUCENA",
       email: "rafaella@kth.se",
@@ -166,7 +166,7 @@ window.onclick = function(event) {
 function scrollToElement(elementID) {
   $('body,html').animate({
     scrollTop: $(elementID).offset().top
-}, 800);
+  }, 800);
 }
 ////////////////////////////////////////////////////////////////
 // FOOTER
