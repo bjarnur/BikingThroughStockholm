@@ -5,7 +5,7 @@ So, have you ever dreamt about biking on the streets of Stockholm Sweden? Right 
 While you bike we keep track of your performance throughout the session. A part of the experience are challenges related to time spent biking, and training intensity, designed to help you get the most of your workout. See you on the streets of Stockholm!
 </p>
 <p style="font-size: 14pt;">
-  This project was developed from September to early November 2018 as part of the DH2413 Advanced Graphics and Interaction course at KTH.
+  This project was developed from November to early December 2018 as part of the DH2413 Advanced Graphics and Interaction course at KTH.
 </p>`
 
 const challenges = `<p>
